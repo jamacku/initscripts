@@ -30,12 +30,13 @@ mandir         = $(datadir)/man
 sysconfdir     = /etc
 localstatedir  = /var
 sharedstatedir = $(localstatedir)/lib
+localmandir    = ./man
 
 VERSION       := $(shell gawk '/Version:/ { print $$2 }' initscripts.spec)
 NEXT_VERSION  := $(shell gawk '/Version:/ { print $$2 + 0.01}' initscripts.spec)
 
 
-all: make-binaries make-translations
+all: make-binaries make-translations generate-doc
 
 
 make-binaries:
@@ -44,6 +45,12 @@ make-binaries:
 make-translations:
 	$(MAKE) -C po
 
+generate-doc:
+	for f in $(localmandir)/*.rst; do \
+		docfilename = $(shell sed -nr 's/([a-z]*)\.([0-9])\.rst\1\p' $$f)
+		manfiledest = $(shell sed -nr 's/([a-z]*)\.([0-9])\.rst\1\p' $$f)
+		rst2man $(docfilename).rst $(docfilename).$(manfiledest);
+	done
 
 # NOTE: We are no longer installing into /usr/sbin directory, because this is
 #       just a symlink to /usr/bin, thanks to UsrMove change. Instead, we just
