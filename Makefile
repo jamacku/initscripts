@@ -47,9 +47,8 @@ make-translations:
 
 generate-doc:
 	for f in $(localmandir)/*.rst; do \
-		docfilename = $(shell sed -nr 's/([a-z]*)\.([0-9])\.rst\1\p' $$f)
-		manfiledest = $(shell sed -nr 's/([a-z]*)\.([0-9])\.rst\1\p' $$f)
-		rst2man $(docfilename).rst $(docfilename).$(manfiledest);
+		manfilename = basename "$$f" '.rst'; \
+		rst2man $$f $(localmandir)/$(manfilename); \
 	done
 
 # NOTE: We are no longer installing into /usr/sbin directory, because this is
