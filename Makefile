@@ -47,8 +47,8 @@ make-translations:
 
 generate-doc:
 	for f in $(localmandir)/*.rst; do \
-		manfilename = basename "$$f" '.rst'; \
-		rst2man $$f $(localmandir)/$(manfilename); \
+		manfilename=basename "$$f" '.rst'; \
+		rst2man $$f $(localmandir)/$$manfilename.test; \
 	done
 
 # NOTE: We are no longer installing into /usr/sbin directory, because this is
