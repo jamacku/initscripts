@@ -155,6 +155,9 @@ source_config ()
     InfiniBand | infiniband)
         DEVICETYPE="ib"
         ;;
+    CAN)
+        DEVICETYPE="can"
+        ;;
     OVS*)
         DEVICETYPE="ovs"
         ;;
