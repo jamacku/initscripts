@@ -30,16 +30,17 @@ else
     exit 1
 fi
 
+# Set data baudrate. THIS IS MANDATORY when CAN FD capable is used
+if [ -n "${DATA_BAUDRATE}" ]; then
+    ip link set ${DEVICE} type can dbitrate "${DATA_BAUDRATE}"
+else
+  net_log $"Device ${DEVICE} does not seem to have declared DATA_BOUDRATE (mandatory parameter) delaying initialization." warning
+    exit 1
+fi
+
 # Set restart time when interface gets to state bus-off. 
 if [ -n "${RESTART_MS}" ]; then
     ip link set ${DEVICE} type can restart-ms "${RESTART_MS}"
-fi
-
-# dbitrate 
-
-
-if [ -n "${TXQUEUELEN}" ]; then
-    ip link set ${DEVICE} txqueuelen "${TXQUEUELEN}"
 fi
 
 ip link set dev ${DEVICE} up
