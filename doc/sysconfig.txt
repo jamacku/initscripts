@@ -915,6 +915,12 @@ Files in /etc/sysconfig/network-scripts/
   TUN/TAP-specific items:
     OWNER=<owner of the device>
 
+  CAN-specific items:
+    TYPE=CAN
+    BOUDRATE=1..1000000
+    DATA_BOUDRATE=1..1000000
+    RESTART_MS=0|NUMBER
+
 /etc/sysconfig/network-scripts/chat-<interface-name>:
 
   chat script for PPP or SLIP connection intended to establish
