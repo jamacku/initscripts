@@ -1,6 +1,6 @@
-## Sysconfig documentation ##
+# Sysconfig documentation #
 
-### Content: ###
+## Content: ##
 
 1. Generic options for folowing files in /etc/sysconfig/
   * authconfig
@@ -33,65 +33,65 @@
 
 ---
 
-### Generic options for folowing files in /etc/sysconfig/: ###
+## Generic options for folowing files in /etc/sysconfig/: ##
 
-##### /etc/sysconfig/authconfig ###
+### /etc/sysconfig/authconfig ###
 
-##### /etc/sysconfig/autofsck #####
+### /etc/sysconfig/autofsck ###
 
-##### /etc/sysconfig/init #####
+### /etc/sysconfig/init ###
 
-##### /etc/sysconfig/keyboard #####
+### /etc/sysconfig/keyboard ###
 
-##### /etc/sysconfig/mouse #####
+### /etc/sysconfig/mouse ###
 
-##### /etc/sysconfig/network #####
+### /etc/sysconfig/network ###
 
-##### /etc/sysconfig/static-routes-ipv6 #####
+### /etc/sysconfig/static-routes-ipv6 ###
 
-##### /etc/sysconfig/routed #####
+### /etc/sysconfig/routed ###
 
-##### /etc/sysconfig/rawdevices #####
+### /etc/sysconfig/rawdevices ###
 
-##### /etc/sysconfig/pcmcia #####
+### /etc/sysconfig/pcmcia ###
 
-##### /etc/sysconfig/amd #####
+### /etc/sysconfig/amd ###
 
-##### /etc/sysconfig/tape #####
+### /etc/sysconfig/tape ###
 
-##### /etc/sysconfig/saslauthd #####
+### /etc/sysconfig/saslauthd ###
 
-##### /etc/sysconfig/sendmail #####
+### /etc/sysconfig/sendmail ###
 
 ---
 
-### Network scripts, files in /etc/sysconfig/network-scripts/: ###
+## Network scripts, files in /etc/sysconfig/network-scripts/: ##
 
-##### /etc/sysconfig/network-scripts/ifup   #####
-##### /etc/sysconfig/network-scripts/ifdown #####
+### /etc/sysconfig/network-scripts/ifup   ###
+### /etc/sysconfig/network-scripts/ifdown ###
 
-##### /etc/sysconfig/network-scripts/init.ipv6-global #####
+### /etc/sysconfig/network-scripts/init.ipv6-global ###
 
-##### /etc/sysconfig/network-scripts/network-functions #####
+### /etc/sysconfig/network-scripts/network-functions ###
 
-##### /etc/sysconfig/network-scripts/network-functions-ipv6 #####
+### /etc/sysconfig/network-scripts/network-functions-ipv6 ###
 
-##### /etc/sysconfig/network-scripts/ifcfg-<interface-name>              #####
-##### /etc/sysconfig/network-scripts/ifcfg-<interface-name>:<alias-name> #####
+### /etc/sysconfig/network-scripts/ifcfg-<interface-name>              ###
+### /etc/sysconfig/network-scripts/ifcfg-<interface-name>:<alias-name> ###
 
-##### /etc/sysconfig/network-scripts/chat-<interface-name> #####
+### /etc/sysconfig/network-scripts/chat-<interface-name> ###
 
-##### /etc/sysconfig/network-scripts/dip-<interface-name> #####
+### /etc/sysconfig/network-scripts/dip-<interface-name> ###
 
-##### /etc/sysconfig/network-scripts/ifup-post #####
+### /etc/sysconfig/network-scripts/ifup-post ###
 
-##### /etc/sysconfig/network-scripts/ifup-routes #####
+### /etc/sysconfig/network-scripts/ifup-routes ###
 
-##### /etc/sysconfig/network-scripts/ifup-aliases #####
+### /etc/sysconfig/network-scripts/ifup-aliases ###
 
-##### /etc/sysconfig/network-scripts/route-<interface-name>  #####
-##### /etc/sysconfig/network-scripts/route6-<interface-name> #####
+### /etc/sysconfig/network-scripts/route-<interface-name>  ###
+### /etc/sysconfig/network-scripts/route6-<interface-name> ###
 
-##### /etc/sysconfig/network-scripts/rule-<interface-name>  #####
-##### /etc/sysconfig/network-scripts/rule6-<interface-name> #####
+### /etc/sysconfig/network-scripts/rule-<interface-name>  ###
+### /etc/sysconfig/network-scripts/rule6-<interface-name> ###
 
