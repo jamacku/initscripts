@@ -1,6 +1,6 @@
-##Sysconfig documentation
+## Sysconfig documentation ##
 
-###Content
+### Content ###
 
 1. Generic options
   * /etc/sysconfig/authconfig
