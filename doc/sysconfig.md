@@ -67,8 +67,7 @@
 
 ## Network scripts, files in /etc/sysconfig/network-scripts/: ##
 
-### /etc/sysconfig/network-scripts/ifup   ###
-### /etc/sysconfig/network-scripts/ifdown ###
+### /etc/sysconfig/network-scripts/ifup & /etc/sysconfig/network-scripts/ifdown ###
 
 ### /etc/sysconfig/network-scripts/init.ipv6-global ###
 
@@ -76,8 +75,7 @@
 
 ### /etc/sysconfig/network-scripts/network-functions-ipv6 ###
 
-### /etc/sysconfig/network-scripts/ifcfg-<interface-name>              ###
-### /etc/sysconfig/network-scripts/ifcfg-<interface-name>:<alias-name> ###
+### /etc/sysconfig/network-scripts/ifcfg-<interface-name> & /etc/sysconfig/network-scripts/ifcfg-<interface-name>:<alias-name> ###
 
 ### /etc/sysconfig/network-scripts/chat-<interface-name> ###
 
@@ -89,9 +87,7 @@
 
 ### /etc/sysconfig/network-scripts/ifup-aliases ###
 
-### /etc/sysconfig/network-scripts/route-<interface-name>  ###
-### /etc/sysconfig/network-scripts/route6-<interface-name> ###
+### /etc/sysconfig/network-scripts/route-<interface-name> & /etc/sysconfig/network-scripts/route6-<interface-name> ###
 
-### /etc/sysconfig/network-scripts/rule-<interface-name>  ###
-### /etc/sysconfig/network-scripts/rule6-<interface-name> ###
+### /etc/sysconfig/network-scripts/rule-<interface-name> & /etc/sysconfig/network-scripts/rule6-<interface-name> ###
 
