@@ -9,8 +9,9 @@ sleep some number of microseconds
 ---------------------------------
 
 :Author: Donald Barnes <djb@redhat.com>
-:Author2: Erik Troan <ewt@redhat.com>         
+:Author: Erik Troan <ewt@redhat.com>         
 :organization: Red Hat, Inc
+
 :Manual section: 1
 :Manual group: General Commands Manual
 
@@ -32,14 +33,11 @@ WARNING
 OPTIONS
 -------
 
-*--usage*
-    Show short usage message.
+*--usage*         Show short usage message.
 
-*--help*, *-?*
-    Print help information.
+*--help*, *-?*      Print help information.
 
-*-v*, *--version*
-    Print version information.
+*-v*, *--version*   Print version information.
 
 BUGS
 ----
