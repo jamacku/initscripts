@@ -11,7 +11,7 @@
 git diff --name-only --diff-filter=db "$(git merge-base HEAD "$TRAVIS_BRANCH")" > ../pr-changes.txt
 
 # Find modified shell scripts
-readarray list_of_changes < ../pr-changes.txt
+readarray list_of_changes < <(grep "^[^#]" ../pr-changes.txt)
 list_of_changed_scripts=()
 for file in "${list_of_changes[@]}"; do
   # https://stackoverflow.com/questions/19345872/how-to-remove-a-newline-from-a-string-in-bash

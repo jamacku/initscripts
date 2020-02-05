@@ -1,3 +1,4 @@
+# Tracker of all shell scripts in this repository
 etc/rc.d/init.d/functions
 etc/rc.d/init.d/network
 network-scripts/ifdown-bnep
