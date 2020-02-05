@@ -31,3 +31,5 @@ usr/libexec/loadmodules
 usr/libexec/netconsole
 usr/libexec/readonly-root
 usr/sbin/service
+.ci/check-shell.sh
+.ci/functions.sh
