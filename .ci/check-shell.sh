@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./ci/functions.sh
+. ./.ci/functions.sh
 
 # ------------ #
 #  FILE PATHS  #

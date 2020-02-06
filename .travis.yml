@@ -27,7 +27,7 @@ matrix:
   include:
     - language: shell
       script: 
-        - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./ci/check-shell.sh; fi'
+        - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./.ci/check-shell.sh; fi'
     - language: c
       script: make all && make install DESTDIR=/tmp/initscripts
 
