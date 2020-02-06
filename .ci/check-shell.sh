@@ -2,6 +2,8 @@
 
 . ./.ci/functions.sh
 
+set -x
+
 # ------------ #
 #  FILE PATHS  #
 # ------------ #
@@ -18,6 +20,14 @@ for file in "${list_of_changes[@]}"; do
   is_it_script "$file" && list_of_changed_scripts+=("./${file//[$'\t\r\n ']}")
 done
 
+echo "------------"
+cat ../pr-changes.txt
+echo "------------"
+echo "${list_of_changes[@]}"
+echo "------------"
+echo "${list_of_changed_scripts[@]}"
+echo "------------"
+
 # ------------ #
 #  SHELLCHECK  #
 # ------------ #
@@ -25,8 +35,6 @@ done
 shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../pr-br-shellcheck.err
 git checkout "$TRAVIS_BRANCH"
 shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../dest-br-shellcheck.err
-
-set -x
 
 # ------------ #
 #  VALIDATION  #
