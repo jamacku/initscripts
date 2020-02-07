@@ -21,6 +21,8 @@ for file in "${list_of_changes[@]}"; do
 done
 
 echo "------------"
+tree ../
+echo "------------"
 cat ../pr-changes.txt
 echo "------------"
 echo "${list_of_changes[@]}"
