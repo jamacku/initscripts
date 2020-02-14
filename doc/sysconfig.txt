@@ -1015,3 +1015,4 @@ Files in /etc/sysconfig/network-scripts/
   Each non-comment line is used directly as an argument to "/sbin/ip rule add"
   or "/sbin/ip -6 rule add" for rule6 files.
 
+Test comment
