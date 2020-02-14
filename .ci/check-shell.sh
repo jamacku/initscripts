@@ -10,7 +10,7 @@ set -x
 
 # https://medium.com/@joey_9999/how-to-only-lint-files-a-git-pull-request-modifies-3f02254ec5e0
 # get names of files from PR (excluding deleted files)
-git diff --name-only --diff-filter=db $(git merge-base HEAD "${TRAVIS_BRANCH}") > ../pr-changes.txt
+git diff --name-only --diff-filter=db "$(git merge-base HEAD "${TRAVIS_BRANCH}")" > ../pr-changes.txt
 
 # Find modified shell scripts
 readarray list_of_changes < <(grep "^[^#]" ../pr-changes.txt)
