@@ -13,6 +13,7 @@ set -x
 git pull
 git status
 git remote show origin
+git show 0bdebf4
 git diff --name-only --diff-filter=db $(git merge-base HEAD "origin/${TRAVIS_BRANCH}") > ../pr-changes.txt
 
 # Find modified shell scripts
