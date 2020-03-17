@@ -20,31 +20,41 @@ for file in "${list_of_changes[@]}"; do
   is_it_script "$file" && list_of_changed_scripts+=("./${file//[$'\t\r\n ']}")
 done
 
+echo -e "\n\n\n"
+echo "##############"
+echo "# CI OUTPUT: #"
+echo "##############"
+echo -e "\n\n\n"
+
 echo "Changed shell scripts:"
 echo "${list_of_changed_scripts[@]}"
 echo "------------"
+echo -e "\n\n"
 
 # ------------ #
 #  SHELLCHECK  #
 # ------------ #
 
-# sed part is to edit shellcheck output so csdiff/csgrep knows it is shellcheck output (--format=gcc)
-shellcheck --format=gcc "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
+shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../pr-br-shellcheck.err
 
 # make destination branch
 [[ ${TRAVIS_COMMIT_RANGE} =~ ^([0-9|a-f]*?)\. ]] && git checkout -b ci_br_dest "${BASH_REMATCH[1]}"
 
-shellcheck --format=gcc "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../dest-br-shellcheck.err
+shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../dest-br-shellcheck.err
 
 # ------------ #
 #  VALIDATION  #
 # ------------ #
 
+echo "Validation:"
+echo "###########"
+echo -e "\n\n"
+
 exitstatus=0
 
 # Check output for Fixes
 csdiff --fixed "../dest-br-shellcheck.err" "../pr-br-shellcheck.err" > ../fixes.log
-if [ "$(cat ../fixes.log | wc -l)" -ne 0 ]; then
+if [ "$(wc -l < ../fixes.log)" -ne 0 ]; then
   echo "Fixed bugs:" 
   csgrep ../fixes.log
   echo "------------"
@@ -53,9 +63,11 @@ else
   echo "------------"
 fi
 
+echo -e "\n\n"
+
 # Check output for added bugs
 csdiff --fixed "../pr-br-shellcheck.err" "../dest-br-shellcheck.err" > ../bugs.log
-if [ "$(cat ../bugs.log | wc -l)" -ne 0 ]; then
+if [ "$(wc -l < ../bugs.log)" -ne 0 ]; then
   echo "Added bugs, NEED INSPECTION:" 
   csgrep ../bugs.log
   echo "------------"
