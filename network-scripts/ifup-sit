@@ -64,9 +64,11 @@ if [ -z "$IPV6TUNNELIPV4" ]; then
     exit 1
 fi
 
+echo $DEVICE
+
 # Test device status
-ipv6_test_device_status $DEVICE
-if [ $? = 0 ]; then
+ipv6_test_device_status "$DEVICE"
+if [ "$?" = 0 ]; then
     # device is already up
     net_log $"Device '$DEVICE' is already up, please shutdown first"
     exit 1
