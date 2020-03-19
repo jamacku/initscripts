@@ -20,16 +20,16 @@ for file in "${list_of_changes[@]}"; do
   is_it_script "$file" && list_of_changed_scripts+=("./${file//[$'\t\r\n ']}")
 done
 
-echo -e "\n\n\n"
+echo -e "\n"
 echo "##############"
 echo "# CI OUTPUT: #"
 echo "##############"
-echo -e "\n\n\n"
+echo ""
 
 echo "Changed shell scripts:"
 echo "${list_of_changed_scripts[@]}"
 echo "------------"
-echo -e "\n\n"
+echo ""
 
 # ------------ #
 #  SHELLCHECK  #
@@ -38,7 +38,7 @@ echo -e "\n\n"
 shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../pr-br-shellcheck.err
 
 # make destination branch
-[[ ${TRAVIS_COMMIT_RANGE} =~ ^([0-9|a-f]*?)\. ]] && git checkout -b ci_br_dest "${BASH_REMATCH[1]}"
+[[ ${TRAVIS_COMMIT_RANGE} =~ ^([0-9|a-f]*?)\. ]] && git checkout -b ci_br_dest "${BASH_REMATCH[1]}" >/dev/null 2>&1
 
 shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../dest-br-shellcheck.err
 
@@ -48,7 +48,7 @@ shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../dest-br-shellcheck.
 
 echo "Validation:"
 echo "###########"
-echo -e "\n\n"
+echo ""
 
 exitstatus=0
 
@@ -63,7 +63,7 @@ else
   echo "------------"
 fi
 
-echo -e "\n\n"
+echo ""
 
 # Check output for added bugs
 csdiff --fixed "../pr-br-shellcheck.err" "../dest-br-shellcheck.err" > ../bugs.log
