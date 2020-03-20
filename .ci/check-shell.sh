@@ -35,6 +35,8 @@ echo ""
 #  SHELLCHECK  #
 # ------------ #
 
+set -x
+
 shellcheck --format=gcc "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
 
 # make destination branch
