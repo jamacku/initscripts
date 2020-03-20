@@ -35,12 +35,12 @@ echo ""
 #  SHELLCHECK  #
 # ------------ #
 
-shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../pr-br-shellcheck.err
+shellcheck --format=gcc "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
 
 # make destination branch
 [[ ${TRAVIS_COMMIT_RANGE} =~ ^([0-9|a-f]*?)\. ]] && git checkout -b ci_br_dest "${BASH_REMATCH[1]}" >/dev/null 2>&1
 
-shellcheck --format=gcc "${list_of_changed_scripts[@]}" > ../dest-br-shellcheck.err
+shellcheck --format=gcc "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../dest-br-shellcheck.err
 
 # ------------ #
 #  VALIDATION  #
