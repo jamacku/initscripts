@@ -1,0 +1,2 @@
+# List of ignored Shellcheck codes
+SC1090

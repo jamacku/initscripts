@@ -67,13 +67,22 @@ fi
 
 echo ""
 
+readarray ignore_list < <(grep "^[^#]" ../pr-changes.txt)
+
 # Check output for added bugs
 csdiff --fixed "../pr-br-shellcheck.err" "../dest-br-shellcheck.err" > ../bugs.log
 if [ "$(wc -l < ../bugs.log)" -ne 0 ]; then
-  echo "Added bugs, NEED INSPECTION:" 
-  csgrep ../bugs.log
-  echo "------------"
-  exitstatus=1
+  if []
+    echo "Added bugs, NEED INSPECTION:" 
+    csgrep ../bugs.log
+    echo "------------"
+    exitstatus=1
+  else
+    echo "List of ignored bugs, BE AWARE OF THOSE BUGS!"
+    csgrep ../bugs.log
+    echo "------------"
+    exitstatus=0
+  fi
 else
   echo "No bugs added Yay!" 
   echo "------------"
