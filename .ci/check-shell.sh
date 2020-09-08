@@ -34,12 +34,12 @@ echo "------------"
 # ------------ #
 
 # sed part is to edit shellcheck output so csdiff/csgrep knows it is shellcheck output (--format=gcc)
-shellcheck --format=gcc -e "${list_of_exceptions}" "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
+shellcheck --format=gcc -e "${list_of_exceptions[@]}" "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
 
 # make destination branch
 [[ ${TRAVIS_COMMIT_RANGE} =~ ^([0-9|a-f]*?)\. ]] && git checkout -b ci_br_dest "${BASH_REMATCH[1]}"
 
-shellcheck --format=gcc -e "${list_of_exceptions}" "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../dest-br-shellcheck.err
+shellcheck --format=gcc -e "${list_of_exceptions[@]}" "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../dest-br-shellcheck.err
 
 # ------------ #
 #  VALIDATION  #
@@ -50,23 +50,23 @@ exitstatus=0
 # Check output for Fixes
 csdiff --fixed "../dest-br-shellcheck.err" "../pr-br-shellcheck.err" > ../fixes.log
 if [ "$(cat ../fixes.log | wc -l)" -ne 0 ]; then
-  echo "Fixed bugs:" 
+  echo -e "${GREEN}Fixed bugs:${NOCOLOR}" 
   csgrep ../fixes.log
   echo "------------"
 else
-  echo "No Fixes!"
+  echo -e "${YELLOW}No Fixes!${NOCOLOR}"
   echo "------------"
 fi
 
 # Check output for added bugs
 csdiff --fixed "../pr-br-shellcheck.err" "../dest-br-shellcheck.err" > ../bugs.log
 if [ "$(cat ../bugs.log | wc -l)" -ne 0 ]; then
-  echo "Added bugs, NEED INSPECTION:" 
+  echo -e "${RED}Added bugs, NEED INSPECTION:${NOCOLOR}" 
   csgrep ../bugs.log
   echo "------------"
   exitstatus=1
 else
-  echo "No bugs added Yay!" 
+  echo -e "${GREEN}No bugs added Yay!${NOCOLOR}" 
   echo "------------"
   exitstatus=0
 fi

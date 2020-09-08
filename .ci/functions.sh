@@ -7,3 +7,11 @@ is_it_script () {
   echo "${list_of_scripts[@]}" | grep --silent "$1" && return 0
 }
 
+# Color aliases use echo -e to use them
+NOCOLOR='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+WHITE='\033[1;37m'
