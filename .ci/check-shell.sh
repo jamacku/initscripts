@@ -12,7 +12,7 @@
 git diff --name-only --diff-filter=db "${TRAVIS_COMMIT_RANGE}" > ../pr-changes.txt
 
 # Find modified shell scripts
-readarray list_of_changes < <(grep "^[^#]" ../pr-changes.txt)
+readarray list_of_changes < <(cut -d ' ' -f 1 < <(grep -v "^#.*" script-list.txt))
 list_of_changed_scripts=()
 for file in "${list_of_changes[@]}"; do
   # https://stackoverflow.com/questions/19345872/how-to-remove-a-newline-from-a-string-in-bash
@@ -20,8 +20,13 @@ for file in "${list_of_changes[@]}"; do
   is_it_script "$file" && list_of_changed_scripts+=("./${file//[$'\t\r\n ']}")
 done
 
+# Get list of exceptions
+readarray list_of_exceptions < <(cut -d ' ' -f 1 < <(grep -v "^#.*" exception-list.txt))
+
 echo "Changed shell scripts:"
 echo "${list_of_changed_scripts[@]}"
+echo "List of exceptions:"
+echo "${list_of_exceptions[@]}"
 echo "------------"
 
 # ------------ #
@@ -29,12 +34,12 @@ echo "------------"
 # ------------ #
 
 # sed part is to edit shellcheck output so csdiff/csgrep knows it is shellcheck output (--format=gcc)
-shellcheck --format=gcc "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
+shellcheck --format=gcc -e "${list_of_exceptions}" "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
 
 # make destination branch
 [[ ${TRAVIS_COMMIT_RANGE} =~ ^([0-9|a-f]*?)\. ]] && git checkout -b ci_br_dest "${BASH_REMATCH[1]}"
 
-shellcheck --format=gcc "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../dest-br-shellcheck.err
+shellcheck --format=gcc -e "${list_of_exceptions}" "${list_of_changed_scripts[@]}" | sed -e 's|$| <--[shellcheck]|' > ../dest-br-shellcheck.err
 
 # ------------ #
 #  VALIDATION  #

@@ -1,0 +1,3 @@
+# List of Shelcheck codes which should be excluded from ci output
+SC1090 #comment
+SC2148 # comment
