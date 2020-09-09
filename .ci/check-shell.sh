@@ -23,9 +23,13 @@ done
 readarray list_of_exceptions < <(cut -d ' ' -f 1 < <(grep -v "^#.*" exception-list.txt)) # fetch array with lines from file while excluding '#' comments
 
 echo "Changed shell scripts:"
-echo -e "${YELLOW}${list_of_changed_scripts[@]}${NOCOLOR}"
+echo -e "${YELLOW}"
+echo "${list_of_changed_scripts[@]}"
+echo -e "${NOCOLOR}"
 echo "List of exceptions:"
-echo -e "${YELLOW}${list_of_exceptions[@]}${NOCOLOR}"
+echo -e "${YELLOW}"
+echo "${list_of_exceptions[@]}"
+echo -e "${NOCOLOR}"
 echo "------------"
 
 # ------------ #

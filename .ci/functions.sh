@@ -3,7 +3,7 @@
 is_it_script () {
   [ $# -eq 0 ] && return 1
   
-  readarray list_of_changes < <(cut -d ' ' -f 1 < <(grep -v "^#.*" script-list.txt)) # fetch array with lines from file while excluding '#' comments
+  readarray list_of_scripts < <(cut -d ' ' -f 1 < <(grep -v "^#.*" ./.ci/script-list.txt)) # fetch array with lines from file while excluding '#' comments
   echo "${list_of_scripts[@]}" | grep --silent "$1" && return 0
   return 1
 }
