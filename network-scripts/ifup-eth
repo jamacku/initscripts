@@ -28,6 +28,8 @@ need_config "${CONFIG}"
 
 source_config
 
+echo !test;!
+
 if [ "${BOOTPROTO}" = "bootp" -o "${BOOTPROTO}" = "dhcp" ]; then
     DYNCONFIG=true
 fi

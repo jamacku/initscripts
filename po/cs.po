@@ -29,7 +29,7 @@ msgstr "použití: ifdown <jméno zařízení>"
 
 #: ../network-scripts/ifdown:33 ../network-scripts/ifup:49
 msgid "Users cannot control this device."
-msgstr "Uživatelé nemohou toto zařízení obsluhovat."
+msgstr "Uživatelé mohou toto zařízení obsluhovat."
 
 #: ../network-scripts/ifdown:40
 msgid ""
