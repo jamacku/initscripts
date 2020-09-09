@@ -1,3 +1,4 @@
 # List of Shelcheck codes which should be excluded from ci output
-SC1090 #comment
-SC2148 # comment
+# Avoid spaces in list since they are counted as comment
+SC1090    # Ignore when shellcheck can't follow non-constant source e.g. ``. "${path}"``
+SC2148    # Ignore missing shebang

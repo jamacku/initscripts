@@ -8,11 +8,10 @@
 
 # https://medium.com/@joey_9999/how-to-only-lint-files-a-git-pull-request-modifies-3f02254ec5e0
 # get names of files from PR (excluding deleted files)
-# TRAVIS_COMMIT_RANGE - HEAD of destination branch ... HEAD of PR branch
 git diff --name-only --diff-filter=db "${TRAVIS_COMMIT_RANGE}" > ../pr-changes.txt
 
 # Find modified shell scripts
-readarray list_of_changes < <(cut -d ' ' -f 1 < <(grep -v "^#.*" script-list.txt))
+readarray list_of_changes < <(cut -d ' ' -f 1 < <(grep -v "^#.*" script-list.txt)) # fetch array with lines from file while excluding '#' comments
 list_of_changed_scripts=()
 for file in "${list_of_changes[@]}"; do
   # https://stackoverflow.com/questions/19345872/how-to-remove-a-newline-from-a-string-in-bash
@@ -21,12 +20,12 @@ for file in "${list_of_changes[@]}"; do
 done
 
 # Get list of exceptions
-readarray list_of_exceptions < <(cut -d ' ' -f 1 < <(grep -v "^#.*" exception-list.txt))
+readarray list_of_exceptions < <(cut -d ' ' -f 1 < <(grep -v "^#.*" exception-list.txt)) # fetch array with lines from file while excluding '#' comments
 
 echo "Changed shell scripts:"
-echo "${list_of_changed_scripts[@]}"
+echo -e "${YELLOW}${list_of_changed_scripts[@]}${NOCOLOR}"
 echo "List of exceptions:"
-echo "${list_of_exceptions[@]}"
+echo -e "${YELLOW}${list_of_exceptions[@]}${NOCOLOR}"
 echo "------------"
 
 # ------------ #
@@ -47,6 +46,8 @@ shellcheck --format=gcc -e "${list_of_exceptions[@]}" "${list_of_changed_scripts
 
 exitstatus=0
 
+echo -e "${WHITE}Validation output:${NOCOLOR}"
+
 # Check output for Fixes
 csdiff --fixed "../dest-br-shellcheck.err" "../pr-br-shellcheck.err" > ../fixes.log
 if [ "$(cat ../fixes.log | wc -l)" -ne 0 ]; then
@@ -57,6 +58,8 @@ else
   echo -e "${YELLOW}No Fixes!${NOCOLOR}"
   echo "------------"
 fi
+
+echo -e "\n"
 
 # Check output for added bugs
 csdiff --fixed "../pr-br-shellcheck.err" "../dest-br-shellcheck.err" > ../bugs.log
