@@ -50,6 +50,8 @@ if [ ${UID} != 0 ]; then
     exit 1
 fi
 
+# test
+
 source_config
 
 if ! is_true ${DEPRECATION_WARNING_ISSUED}; then

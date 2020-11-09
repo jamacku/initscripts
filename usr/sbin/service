@@ -37,7 +37,7 @@ while [ $# -gt 0 ]; do
         ;;
     *)
         if [ -z "${SERVICE}" ] && [ $# -eq 1 ] && [ "${1}" = "--status-all" ]; then
-            cd ${SERVICEDIR}
+            cd ${SERVICEDIR} || exit
             for SERVICE in * ; do
                 case "${SERVICE}" in
                 functions | halt | killall | single| linuxconf| kudzu)
