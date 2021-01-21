@@ -1,0 +1,25 @@
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+name: Shellcheck test
+on: pull_request
+
+jobs:
+  shellCheck:
+    runs-on: ubuntu-14.04
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v2
+      - name: Install apt-transport-https
+        run: sudo apt-get update && sudo apt-get install -y apt-transport-https
+      - name: Get csbuild sources
+        run: echo "deb https://kdudka.fedorapeople.org/csbuild trusty contrib" | sudo tee -a /etc/apt/sources.list
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake help2man libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-python-dev libboost-regex-dev tree
+      - name: Install csbuild
+        run: sudo apt-get install -y --force-yes csbuild
+      - name: TEST
+        run: echo ${{ github.event.pull_request.base.ref }} && echo ${{ github.event.pull_request.head.ref }}
+      - name: Run shell-check test
+        run: bash ./check-shell.sh
