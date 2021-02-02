@@ -453,11 +453,16 @@ check_device_down ()
     fi
 }
 
-check_link_down ()
+set_link_up ()
 {
-    if ! LC_ALL=C ip link show dev $1 2>/dev/null| grep -q ",UP" ; then
+    if [ "$LINKSTATUS" != up ]; then
         ip link set dev $1 up >/dev/null 2>&1
     fi
+}
+
+check_link_down ()
+{
+    set_link_up $1
     timeout=0
     delay=10
     [ -n "$LINKDELAY" ] && delay=$(($LINKDELAY * 2))
