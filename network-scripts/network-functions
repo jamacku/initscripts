@@ -455,8 +455,10 @@ check_device_down ()
 
 set_link_up ()
 {
-    if [ "$LINKSTATUS" != up ]; then
-        ip link set dev $1 up >/dev/null 2>&1
+    if [ "$LINKSTATUS" != down ]; then
+        if ! LC_ALL=C ip link show dev $1 2>/dev/null| grep -q ",UP" ; then
+            ip link set dev $1 up >/dev/null 2>&1
+        fi
     fi
 }
 
