@@ -17,11 +17,14 @@
 
 # test
 
+TEST="test"
+echo $TEST
+
 unset WINDOW # defined by screen, conflicts with our usage
 
 . /etc/init.d/functions
 
-cd /etc/sysconfig/network-scripts
+cd /etc/sysconfig/network-scripts || exit
 . ./network-functions
 
 [ -f ../network ] && . ../network
