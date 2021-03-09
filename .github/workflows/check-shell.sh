@@ -53,8 +53,6 @@ echo -e "\n"
 # sed part is to edit shellcheck output so csdiff/csgrep knows it is shellcheck output (--format=gcc)
 shellcheck --format=gcc --exclude="${string_of_exceptions}" "${list_of_changed_scripts[@]}" 2> /dev/null | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
 
-git branch
-
 # make destination branch
 git checkout -q -b ci_br_dest "$git_base"
 
