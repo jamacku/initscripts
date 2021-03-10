@@ -3,6 +3,7 @@
 # $@ - <array of strings> list of strings to compare with
 # $? - return value - 0 when succes
 is_it_script () {
+  set -x
   [ $# -le 1 ] && return 1
   local file="$1"
   shift
@@ -16,6 +17,7 @@ is_it_script () {
 # $1 - <string> absolute path to file
 # $? - return value - 0 when succes
 check_extension () {
+  set -x
   [ $# -le 0 ] && return 1
   local file="$1"
 
@@ -27,6 +29,7 @@ check_extension () {
 # $1 - <string> absolute path to file
 # $? - return value - 0 when succes
 check_shebang () {
+  set -x
   [ $# -le 0 ] && return 1
   local file="$1"
 
@@ -45,6 +48,7 @@ check_shebang () {
 # $@ - <array of string> list of strings
 # return value - string
 join_by () {
+  set -x
   local IFS="$1"
   shift
   echo "$*"
@@ -56,6 +60,7 @@ join_by () {
 # $3 - value 1|0 - does file content inline comments?
 # $? - return value - 0 when succes
 file_to_array () {
+  set -x
   [ $# -le 2 ] && return 1
   local output=()
 
@@ -72,6 +77,7 @@ file_to_array () {
 # $@ - source array
 # $? - return value - 0 when succes
 clean_array () {
+  set -x
   [ $# -le 2 ] && return 1
   local output="$1"
   shift

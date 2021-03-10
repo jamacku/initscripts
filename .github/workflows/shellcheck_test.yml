@@ -25,7 +25,5 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}  
-      - name: Debug
-        run: echo ${{ github.event.pull_request }}
       - name: Run shell-check test
         run: bash ./.github/workflows/check-shell.sh ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}

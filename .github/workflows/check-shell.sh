@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 PWD=".github/workflows"
 
 . ./${PWD}/functions.sh
@@ -11,23 +13,15 @@ git_head=$2
 #  FILE PATHS  #
 # ------------ #
 
-git branch
-
 # https://github.com/actions/runner/issues/342
 # get names of files from PR (excluding deleted files)
 git diff --name-only --diff-filter=db "$git_base".."$git_head" > ../pr-changes.txt
-git diff --name-only --diff-filter=db "$git_base".."$git_head"
 
 # Find modified shell scripts
 list_of_changes=()
 file_to_array "../pr-changes.txt" "list_of_changes" 0
 list_of_scripts=()
 file_to_array "./${PWD}/script-list.txt" "list_of_scripts" 1
-
-cat ../pr-changes.txt
-echo "${list_of_changes[@]}"
-echo "${list_of_scripts[@]}"
-tree
 
 # Create list of scripts for testing
 list_of_changed_scripts=()
@@ -62,12 +56,8 @@ echo -e "\n"
 # sed part is to edit shellcheck output so csdiff/csgrep knows it is shellcheck output (--format=gcc)
 shellcheck --format=gcc --exclude="${string_of_exceptions}" "${list_of_changed_scripts[@]}" 2> /dev/null | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
 
-git branch
-
 # make destination branch
 git checkout -q -b ci_br_dest "$git_base"
-
-git branch
 
 shellcheck --format=gcc --exclude="${string_of_exceptions}" "${list_of_changed_scripts[@]}" 2> /dev/null | sed -e 's|$| <--[shellcheck]|' > ../dest-br-shellcheck.err
 
