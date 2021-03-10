@@ -23,6 +23,10 @@ file_to_array "../pr-changes.txt" "list_of_changes" 0
 list_of_scripts=()
 file_to_array "./${PWD}/script-list.txt" "list_of_scripts" 1
 
+echo "${list_of_changes[@]}"
+echo "${list_of_scripts[@]}"
+tree
+
 # Create list of scripts for testing
 list_of_changed_scripts=()
 for file in "${list_of_changes[@]}"; do
