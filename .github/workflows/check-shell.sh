@@ -11,6 +11,8 @@ git_head=$2
 #  FILE PATHS  #
 # ------------ #
 
+git branch
+
 # https://github.com/actions/runner/issues/342
 # get names of files from PR (excluding deleted files)
 git diff --name-only --diff-filter=db "$git_base".."$git_head" > ../pr-changes.txt
@@ -53,8 +55,12 @@ echo -e "\n"
 # sed part is to edit shellcheck output so csdiff/csgrep knows it is shellcheck output (--format=gcc)
 shellcheck --format=gcc --exclude="${string_of_exceptions}" "${list_of_changed_scripts[@]}" 2> /dev/null | sed -e 's|$| <--[shellcheck]|' > ../pr-br-shellcheck.err
 
+git branch
+
 # make destination branch
 git checkout -q -b ci_br_dest "$git_base"
+
+git branch
 
 shellcheck --format=gcc --exclude="${string_of_exceptions}" "${list_of_changed_scripts[@]}" 2> /dev/null | sed -e 's|$| <--[shellcheck]|' > ../dest-br-shellcheck.err
 
