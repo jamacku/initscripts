@@ -16,6 +16,7 @@ git branch
 # https://github.com/actions/runner/issues/342
 # get names of files from PR (excluding deleted files)
 git diff --name-only --diff-filter=db "$git_base".."$git_head" > ../pr-changes.txt
+git diff --name-only --diff-filter=db "$git_base".."$git_head"
 
 # Find modified shell scripts
 list_of_changes=()
@@ -23,6 +24,7 @@ file_to_array "../pr-changes.txt" "list_of_changes" 0
 list_of_scripts=()
 file_to_array "./${PWD}/script-list.txt" "list_of_scripts" 1
 
+cat ../pr-changes.txt
 echo "${list_of_changes[@]}"
 echo "${list_of_scripts[@]}"
 tree
@@ -30,6 +32,7 @@ tree
 # Create list of scripts for testing
 list_of_changed_scripts=()
 for file in "${list_of_changes[@]}"; do
+  echo "${file}"
   is_it_script "$file" "${list_of_scripts[@]}" && list_of_changed_scripts+=("./${file}") && continue
   check_extension "$file" && list_of_changed_scripts+=("./${file}") && continue
   check_shebang "$file" && list_of_changed_scripts+=("./${file}")
