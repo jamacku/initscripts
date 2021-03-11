@@ -1,0 +1,9 @@
+#!/bin/bash
+
+I="test"
+
+echo $I
+
+if $I then
+
+  if
