@@ -9,7 +9,7 @@ Doucumentation for /etc/sysconfig/* scripts
 
 ### /etc/sysconfig/authconfig
 
-used by authconfig to store information about the system's user information and authentication setup; changes made to this file have no effect until the next time authconfig is run.
+Used by authconfig to store information about the system's user information and authentication setup. Changes made to this file have no effect until the next time authconfig is run.
 
 * `USEHESIOD=no`:
     Whether or not the hesiod naming service is in use. If not set, authconfig examines the passwd setting in `/etc/nsswitch.conf`.
@@ -34,6 +34,16 @@ used by authconfig to store information about the system's user information and 
     
 * `USESMBAUTH=no`:
     Whether or not SMB authentication is in use. If not set, authconfig examines the settings in `/etc/pam.d/system-auth`.
+
+### /etc/sysconfig/autofsck
+
+Does not normally exist. If it does, it can influence a choice whether or not to fsck after a crash.
+
+* `AUTOFSCK_DEF_CHECK=no`:
+    If the user does not respond, choose whether or not to fsck.
+
+* `AUTOFSCK_SINGLEUSER=[yes|no]`:
+    If the user does not respond, choose whether or not to fsck.
 
 ## Network-scripts related documentation
 
