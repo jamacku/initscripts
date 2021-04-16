@@ -1,0 +1,48 @@
+.\" generated with Ronn-NG/v0.9.1
+.\" http://github.com/apjanke/ronn-ng/tree/0.9.1
+.TH "SYSCONFIG" "8" "April 2021" ""
+.SH "NAME"
+\fBsysconfig\fR \- Sysconfig related documentation
+.SH "DESCRIPTION"
+Doucumentation for /etc/sysconfig/* scripts
+.SH "GENERIC CONFIGURATION OPTIONS"
+.SS "/etc/sysconfig/authconfig"
+used by authconfig to store information about the system\'s user information and authentication setup; changes made to this file have no effect until the next time authconfig is run\.
+.TP
+\fBUSEHESIOD=no\fR
+Whether or not the hesiod naming service is in use\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
+.TP
+\fBUSELDAP=no\fR
+Whether or not LDAP is used as a naming service\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
+.TP
+\fBUSENIS=no\fR
+Whether or not NIS is in use\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
+.TP
+\fBUSEKERBEROS=no\fR
+Whether or not Kerberos is in use\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\.
+.TP
+\fBUSELDAPAUTH=no\fR
+Whether or not LDAP is being used for authentication\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\. Note that this option is separate from \fBUSELDAP\fR, and that neither implies the other\.
+.TP
+\fBUSEMD5=no\fR
+Whether or not MD5\-based hashing should be used when setting passwords\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\. This option affects authentication using both local files and LDAP\.
+.TP
+\fBUSESHADOW=no\fR
+Whether or not shadow passwords are in use\. If not set, authconfig checks for the existence of \fB/etc/shadow\fR\.
+.TP
+\fBUSESMBAUTH=no\fR
+Whether or not SMB authentication is in use\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\.
+.SH "Network\-scripts related documentation"
+.SH "SYNOPSIS"
+.SH "OPTIONS"
+.SH "SYNTAX"
+.SH "ENVIRONMENT"
+.SH "RETURN VALUES"
+.SH "STANDARDS"
+.SH "SECURITY CONSIDERATIONS"
+.SH "BUGS"
+.SH "HISTORY"
+.SH "AUTHOR"
+.SH "COPYRIGHT"
+.SH "SEE ALSO"
+

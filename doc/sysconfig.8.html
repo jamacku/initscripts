@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' content='text/html;charset=utf8'>
+  <meta name='generator' content='Ronn-NG/v0.9.1 (http://github.com/apjanke/ronn-ng/tree/0.9.1)'>
+  <title>sysconfig(8) - Sysconfig related documentation</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#GENERIC-CONFIGURATION-OPTIONS">GENERIC CONFIGURATION OPTIONS</a>
+    <a href="#NETWORK-SCRIPTS-RELATED-DOCUMENTATION">Network-scripts related documentation</a>
+    <a href="#SYNOPSIS">SYNOPSIS</a>
+    <a href="#OPTIONS">OPTIONS</a>
+    <a href="#SYNTAX">SYNTAX</a>
+    <a href="#ENVIRONMENT">ENVIRONMENT</a>
+    <a href="#RETURN-VALUES">RETURN VALUES</a>
+    <a href="#STANDARDS">STANDARDS</a>
+    <a href="#SECURITY-CONSIDERATIONS">SECURITY CONSIDERATIONS</a>
+    <a href="#BUGS">BUGS</a>
+    <a href="#HISTORY">HISTORY</a>
+    <a href="#AUTHOR">AUTHOR</a>
+    <a href="#COPYRIGHT">COPYRIGHT</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>sysconfig(8)</li>
+    <li class='tc'></li>
+    <li class='tr'>sysconfig(8)</li>
+  </ol>
+
+  
+
+<h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>sysconfig</code> - <span class="man-whatis">Sysconfig related documentation</span>
+</p>
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>Doucumentation for /etc/sysconfig/* scripts</p>
+
+<h2 id="GENERIC-CONFIGURATION-OPTIONS">GENERIC CONFIGURATION OPTIONS</h2>
+
+<h3 id="-etc-sysconfig-authconfig">/etc/sysconfig/authconfig</h3>
+
+<p>used by authconfig to store information about the system's user information and authentication setup; changes made to this file have no effect until the next time authconfig is run.</p>
+
+<dl>
+<dt><code>USEHESIOD=no</code></dt>
+<dd>  Whether or not the hesiod naming service is in use. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
+<dt><code>USELDAP=no</code></dt>
+<dd>  Whether or not LDAP is used as a naming service. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
+<dt><code>USENIS=no</code></dt>
+<dd>  Whether or not NIS is in use. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
+<dt><code>USEKERBEROS=no</code></dt>
+<dd>  Whether or not Kerberos is in use. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>.</dd>
+<dt><code>USELDAPAUTH=no</code></dt>
+<dd>  Whether or not LDAP is being used for authentication. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>. Note that this option is separate from <code>USELDAP</code>, and that neither implies the other.</dd>
+<dt><code>USEMD5=no</code></dt>
+<dd>  Whether or not MD5-based hashing should be used when setting passwords. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>. This option affects authentication using both local files and LDAP.</dd>
+<dt><code>USESHADOW=no</code></dt>
+<dd>  Whether or not shadow passwords are in use. If not set, authconfig checks for the existence of <code>/etc/shadow</code>.</dd>
+<dt><code>USESMBAUTH=no</code></dt>
+<dd>  Whether or not SMB authentication is in use. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>.</dd>
+</dl>
+
+<h2 id="Network-scripts-related-documentation">Network-scripts related documentation</h2>
+
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<h2 id="OPTIONS">OPTIONS</h2>
+
+<h2 id="SYNTAX">SYNTAX</h2>
+
+<h2 id="ENVIRONMENT">ENVIRONMENT</h2>
+
+<h2 id="RETURN-VALUES">RETURN VALUES</h2>
+
+<h2 id="STANDARDS">STANDARDS</h2>
+
+<h2 id="SECURITY-CONSIDERATIONS">SECURITY CONSIDERATIONS</h2>
+
+<h2 id="BUGS">BUGS</h2>
+
+<h2 id="HISTORY">HISTORY</h2>
+
+<h2 id="AUTHOR">AUTHOR</h2>
+
+<h2 id="COPYRIGHT">COPYRIGHT</h2>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>April 2021</li>
+    <li class='tr'>sysconfig(8)</li>
+  </ol>
+
+  </div>
+</body>
+</html>
