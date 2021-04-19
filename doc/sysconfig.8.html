@@ -55,6 +55,7 @@
   <div class='man-navigation' style='display:none'>
     <a href="#NAME">NAME</a>
     <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#CONTENT">CONTENT</a>
     <a href="#GENERIC-CONFIGURATION-OPTIONS">GENERIC CONFIGURATION OPTIONS</a>
     <a href="#NETWORK-SCRIPTS-RELATED-DOCUMENTATION">Network-scripts related documentation</a>
     <a href="#SYNOPSIS">SYNOPSIS</a>
@@ -87,11 +88,13 @@
 
 <p>Doucumentation for /etc/sysconfig/* scripts</p>
 
+<h2 id="CONTENT">CONTENT</h2>
+
 <h2 id="GENERIC-CONFIGURATION-OPTIONS">GENERIC CONFIGURATION OPTIONS</h2>
 
 <h3 id="-etc-sysconfig-authconfig">/etc/sysconfig/authconfig</h3>
 
-<p>used by authconfig to store information about the system's user information and authentication setup; changes made to this file have no effect until the next time authconfig is run.</p>
+<p>Used by authconfig to store information about the system's user information and authentication setup. Changes made to this file have no effect until the next time authconfig is run.</p>
 
 <dl>
 <dt><code>USEHESIOD=no</code></dt>
@@ -110,6 +113,65 @@
 <dd>  Whether or not shadow passwords are in use. If not set, authconfig checks for the existence of <code>/etc/shadow</code>.</dd>
 <dt><code>USESMBAUTH=no</code></dt>
 <dd>  Whether or not SMB authentication is in use. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>.</dd>
+</dl>
+
+<h3 id="-etc-sysconfig-autofsck">/etc/sysconfig/autofsck</h3>
+
+<p>Does not normally exist. If it does, it can influence a choice whether or not to fsck after a crash.</p>
+
+<dl>
+<dt><code>AUTOFSCK_DEF_CHECK=no</code></dt>
+<dd>  If the user does not respond, choose whether or not to fsck.</dd>
+<dt><code>AUTOFSCK_SINGLEUSER=[yes|no]</code></dt>
+<dd>  If the user does not respond, choose whether or not to fsck.</dd>
+</dl>
+
+<h3 id="-etc-sysconfig-init">/etc/sysconfig/init</h3>
+
+<dl>
+<dt>
+<code>BOOTUP</code>=<var>bootup mode</var>
+</dt>
+<dd>  <code>BOOTUP=graphical</code> means use X Windows graphical boot up. <code>BOOTUP=color</code> means colorized text mode boot display. <code>BOOTUP=verbose</code> means old style display. Anything else means simplified display, but without color or ANSI-formatting</dd>
+<dt>
+<code>LOGLEVEL</code>=<var>number</var>
+</dt>
+<dd>  Sets the initial console logging level for the kernel. The default is 7. Number 8 means everything (including debugging). Number 1 means nothing except kernel panics. Syslogd will override this once it starts.</dd>
+<dt>
+<code>RES_COL</code>=<var>number</var>
+</dt>
+<dd>  Column of the screen to start status labels at. Defaults to 60.</dd>
+<dt>
+<code>MOVE_TO_COL</code>=<var>command</var>
+</dt>
+<dd>  A command to move the cursor to $RES_COL. Defaults to nasty. ANSI sequences output by <var>echo -e</var>.</dd>
+<dt>
+<code>SETCOLOR_SUCCESS</code>=<var>command</var>
+</dt>
+<dd>  A command to set the color to a color indicating success. Defaults to nasty ANSI sequences output by <var>echo -e</var> setting the color to green.</dd>
+<dt>
+<code>SETCOLOR_FAILURE</code>=<var>command</var>
+</dt>
+<dd>  A command to set the color to a color indicating failure. Defaults to nasty ANSI sequences output by <var>echo -e</var> setting the color to red.</dd>
+<dt>
+<code>SETCOLOR_WARNING</code>=<var>command</var>
+</dt>
+<dd>  A command to set the color to a color indicating warning. Defaults to nasty ANSI sequences output by <var>echo -e</var> setting the color to yellow.</dd>
+<dt>
+<code>SETCOLOR_NORMAL</code>=<var>command</var>
+</dt>
+<dd>  A command to set the color to 'normal'. Defaults to nasty ANSI sequences output by <var>echo - e</var>.</dd>
+<dt><code>PROMPT=yes|no</code></dt>
+<dd>  Set to 'yes' to enable the key check for interactive mode as well as asking if a filesystem check should be done. Default is 'no' and the kernel command line option "forcefsck" can be used to check the filesystems and "confirm" can be used to enable interactive startup questions.</dd>
+</dl>
+
+<p><em>obsoleted values from earlier releases</em>:</p>
+
+<dl>
+<dt><code>MAGIC_SYSRQ=yes|no</code></dt>
+<dd>  Setting this to 'no' used to disable the magic sysrq key and Stop-A (break on serial console) on SPARC. This setting has been moved into kernel.sysrq and kernel.stop-a settings respectively in sysctl.d/00-system.conf. Setting either of them there to 0 disables it, setting it to 1 enables it.</dd>
+<dt><code>STOP_A=yes|no</code></dt>
+<dd>  Setting this to 'no' used to disable the Stop-A (break on serial console) key on SPARC. This setting has been moved into kernel.stop-a setting in sysctl.d/00-system.conf. Setting it there to 0 disables it, setting it to 1 enables it. The setting should be present on SPARC only.</dd>
 </dl>
 
 <h2 id="Network-scripts-related-documentation">Network-scripts related documentation</h2>

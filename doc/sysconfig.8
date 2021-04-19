@@ -5,9 +5,10 @@
 \fBsysconfig\fR \- Sysconfig related documentation
 .SH "DESCRIPTION"
 Doucumentation for /etc/sysconfig/* scripts
+.SH "CONTENT"
 .SH "GENERIC CONFIGURATION OPTIONS"
 .SS "/etc/sysconfig/authconfig"
-used by authconfig to store information about the system\'s user information and authentication setup; changes made to this file have no effect until the next time authconfig is run\.
+Used by authconfig to store information about the system\'s user information and authentication setup\. Changes made to this file have no effect until the next time authconfig is run\.
 .TP
 \fBUSEHESIOD=no\fR
 Whether or not the hesiod naming service is in use\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
@@ -32,6 +33,50 @@ Whether or not shadow passwords are in use\. If not set, authconfig checks for t
 .TP
 \fBUSESMBAUTH=no\fR
 Whether or not SMB authentication is in use\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\.
+.SS "/etc/sysconfig/autofsck"
+Does not normally exist\. If it does, it can influence a choice whether or not to fsck after a crash\.
+.TP
+\fBAUTOFSCK_DEF_CHECK=no\fR
+If the user does not respond, choose whether or not to fsck\.
+.TP
+\fBAUTOFSCK_SINGLEUSER=[yes|no]\fR
+If the user does not respond, choose whether or not to fsck\.
+.SS "/etc/sysconfig/init"
+.TP
+\fBBOOTUP\fR=\fIbootup mode\fR
+\fBBOOTUP=graphical\fR means use X Windows graphical boot up\. \fBBOOTUP=color\fR means colorized text mode boot display\. \fBBOOTUP=verbose\fR means old style display\. Anything else means simplified display, but without color or ANSI\-formatting
+.TP
+\fBLOGLEVEL\fR=\fInumber\fR
+Sets the initial console logging level for the kernel\. The default is 7\. Number 8 means everything (including debugging)\. Number 1 means nothing except kernel panics\. Syslogd will override this once it starts\.
+.TP
+\fBRES_COL\fR=\fInumber\fR
+Column of the screen to start status labels at\. Defaults to 60\.
+.TP
+\fBMOVE_TO_COL\fR=\fIcommand\fR
+A command to move the cursor to $RES_COL\. Defaults to nasty\. ANSI sequences output by \fIecho \-e\fR\.
+.TP
+\fBSETCOLOR_SUCCESS\fR=\fIcommand\fR
+A command to set the color to a color indicating success\. Defaults to nasty ANSI sequences output by \fIecho \-e\fR setting the color to green\.
+.TP
+\fBSETCOLOR_FAILURE\fR=\fIcommand\fR
+A command to set the color to a color indicating failure\. Defaults to nasty ANSI sequences output by \fIecho \-e\fR setting the color to red\.
+.TP
+\fBSETCOLOR_WARNING\fR=\fIcommand\fR
+A command to set the color to a color indicating warning\. Defaults to nasty ANSI sequences output by \fIecho \-e\fR setting the color to yellow\.
+.TP
+\fBSETCOLOR_NORMAL\fR=\fIcommand\fR
+A command to set the color to \'normal\'\. Defaults to nasty ANSI sequences output by \fIecho \- e\fR\.
+.TP
+\fBPROMPT=yes|no\fR
+Set to \'yes\' to enable the key check for interactive mode as well as asking if a filesystem check should be done\. Default is \'no\' and the kernel command line option "forcefsck" can be used to check the filesystems and "confirm" can be used to enable interactive startup questions\.
+.P
+\fIobsoleted values from earlier releases\fR:
+.TP
+\fBMAGIC_SYSRQ=yes|no\fR
+Setting this to \'no\' used to disable the magic sysrq key and Stop\-A (break on serial console) on SPARC\. This setting has been moved into kernel\.sysrq and kernel\.stop\-a settings respectively in sysctl\.d/00\-system\.conf\. Setting either of them there to 0 disables it, setting it to 1 enables it\.
+.TP
+\fBSTOP_A=yes|no\fR
+Setting this to \'no\' used to disable the Stop\-A (break on serial console) key on SPARC\. This setting has been moved into kernel\.stop\-a setting in sysctl\.d/00\-system\.conf\. Setting it there to 0 disables it, setting it to 1 enables it\. The setting should be present on SPARC only\.
 .SH "Network\-scripts related documentation"
 .SH "SYNOPSIS"
 .SH "OPTIONS"
