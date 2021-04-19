@@ -44,7 +44,9 @@ If the user does not respond, choose whether or not to fsck\.
 .SS "/etc/sysconfig/init"
 .TP
 \fBBOOTUP\fR=\fIbootup mode\fR
-\fBBOOTUP=graphical\fR means use X Windows graphical boot up\. \fBBOOTUP=color\fR means colorized text mode boot display\. \fBBOOTUP=verbose\fR means old style display\. Anything else means simplified display, but without color or ANSI\-formatting
+\fBBOOTUP=graphical\fR means use X Windows graphical boot up\. \fBBOOTUP=color\fR means colorized text mode boot display\. \fBBOOTUP=verbose\fR means old style display\.
+.IP
+Anything else means simplified display, but without color or ANSI\-formatting\.
 .TP
 \fBLOGLEVEL\fR=\fInumber\fR
 Sets the initial console logging level for the kernel\. The default is 7\. Number 8 means everything (including debugging)\. Number 1 means nothing except kernel panics\. Syslogd will override this once it starts\.
@@ -77,6 +79,14 @@ Setting this to \fIno\fR used to disable the magic sysrq key and \fBStop\-A\fR (
 .TP
 \fBSTOP_A\fR=\fIyes|no\fR
 Setting this to \fIno\fR used to disable the \fBStop\-A\fR (break on serial console) key on \fBSPARC\fR\. This setting has been moved into
+.SS "/etc/sysconfig/keyboard"
+.IP "\[ci]" 4
+\fBKEYTABLE\fR=\fIkeytable file\fR: If you dump a keymap (using \fIdumpkeys\fR) to it will be loaded on bootup before filesystems are mounted/checked\. This could be useful if you need to emergency type the root password\. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the directory\.
+.IP
+example: \fBKEYTABLE="/usr/lib/kbd/keytables/us\.map"\fR
+.IP "\[ci]" 4
+\fBKEYBOARDTYPE\fR=\fIsun|pc\fR On \fBSPARC\fR only, sun means a sun keyboard is attached on </dev/kbd>, pc means a PS/2 keyboard is on PS/2 port\.
+.IP "" 0
 .SH "Network\-scripts related documentation"
 .SH "SYNOPSIS"
 .SH "OPTIONS"

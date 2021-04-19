@@ -152,7 +152,12 @@
 <dt>
 <code>BOOTUP</code>=<var>bootup mode</var>
 </dt>
-<dd>  <code>BOOTUP=graphical</code> means use X Windows graphical boot up. <code>BOOTUP=color</code> means colorized text mode boot display. <code>BOOTUP=verbose</code> means old style display. Anything else means simplified display, but without color or ANSI-formatting</dd>
+<dd>  <code>BOOTUP=graphical</code> means use X Windows graphical boot up.
+  <code>BOOTUP=color</code> means colorized text mode boot display.
+  <code>BOOTUP=verbose</code> means old style display.
+
+    <p>Anything else means simplified display, but without color or ANSI-formatting.</p>
+</dd>
 <dt>
 <code>LOGLEVEL</code>=<var>number</var>
 </dt>
@@ -201,6 +206,21 @@
 <dd>  Setting this to <var>no</var> used to disable the <code>Stop-A</code> (break on serial console) key on <code>SPARC</code>. This setting has been moved into <kernel.stop-a> setting in &lt;sysctl.d/00-system.conf&gt;. Setting it there to 0 disables it, setting it to 1 enables it. The setting should be present on `SPARC` only.</kernel.stop-a>
 </dd>
 </dl>
+
+<h3 id="-etc-sysconfig-keyboard">/etc/sysconfig/keyboard</h3>
+
+<ul>
+  <li>
+    <p><code>KEYTABLE</code>=<var>keytable file</var>:
+  If you dump a keymap (using <var>dumpkeys</var>) to  it will be loaded on bootup before filesystems are mounted/checked. This could be useful if you need to emergency type the root password. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the  directory.</p>
+
+    <p>example: <code>KEYTABLE="/usr/lib/kbd/keytables/us.map"</code></p>
+  </li>
+  <li>
+    <p><code>KEYBOARDTYPE</code>=<var>sun|pc</var>
+  On <code>SPARC</code> only, sun means a sun keyboard is attached on &lt;/dev/kbd&gt;, pc means a PS/2 keyboard is on PS/2 port.</p>
+  </li>
+</ul>
 
 <h2 id="Network-scripts-related-documentation">Network-scripts related documentation</h2>
 
