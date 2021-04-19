@@ -209,18 +209,36 @@
 
 <h3 id="-etc-sysconfig-keyboard">/etc/sysconfig/keyboard</h3>
 
-<ul>
-  <li>
-    <p><code>KEYTABLE</code>=<var>keytable file</var>:
-  If you dump a keymap (using <var>dumpkeys</var>) to  it will be loaded on bootup before filesystems are mounted/checked. This could be useful if you need to emergency type the root password. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the  directory.</p>
+<dl>
+<dt>
+<code>KEYTABLE</code>=<var>keytable file</var>
+</dt>
+<dd>  If you dump a keymap (using <var>dumpkeys</var>) to  it will be loaded on bootup before filesystems are mounted/checked. This could be useful if you need to emergency type the root password. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the  directory.
 
     <p>example: <code>KEYTABLE="/usr/lib/kbd/keytables/us.map"</code></p>
-  </li>
-  <li>
-    <p><code>KEYBOARDTYPE</code>=<var>sun|pc</var>
-  On <code>SPARC</code> only, sun means a sun keyboard is attached on &lt;/dev/kbd&gt;, pc means a PS/2 keyboard is on PS/2 port.</p>
-  </li>
-</ul>
+</dd>
+<dt>
+<code>KEYBOARDTYPE</code>=<var>sun|pc</var>
+</dt>
+<dd>  On <code>SPARC</code> only, sun means a sun keyboard is attached on &lt;/dev/kbd&gt;, pc means a PS/2 keyboard is on PS/2 port.</dd>
+</dl>
+
+<h3 id="-etc-sysconfig-mouse">/etc/sysconfig/mouse</h3>
+
+<dl>
+<dt>
+<code>MOUSETYPE</code>=<var>type</var>
+</dt>
+<dd>  Supportet mouse types are: <var>microsoft</var>, <var>mouseman</var>, <var>mousesystems</var>, &lt;ps/2&gt;, <var>msbm</var>, <var>logibm</var>, <var>atibm</var>, <var>logitech</var>, <var>mmseries</var> and <var>mmhittab</var>.</dd>
+<dt>
+<code>XEMU3</code>=<var>yes|no</var>
+</dt>
+<dd>  Emulate three buttons with two buttons whenever necessary, most notably in X.</dd>
+<dt>
+<code>DEVICE</code>=<var>device node</var>
+</dt>
+<dd>  The device of the mouse. In addition, &lt;/dev/mouse&gt; points to the mouse device.</dd>
+</dl>
 
 <h2 id="Network-scripts-related-documentation">Network-scripts related documentation</h2>
 

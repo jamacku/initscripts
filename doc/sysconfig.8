@@ -80,13 +80,24 @@ Setting this to \fIno\fR used to disable the magic sysrq key and \fBStop\-A\fR (
 \fBSTOP_A\fR=\fIyes|no\fR
 Setting this to \fIno\fR used to disable the \fBStop\-A\fR (break on serial console) key on \fBSPARC\fR\. This setting has been moved into
 .SS "/etc/sysconfig/keyboard"
-.IP "\[ci]" 4
-\fBKEYTABLE\fR=\fIkeytable file\fR: If you dump a keymap (using \fIdumpkeys\fR) to it will be loaded on bootup before filesystems are mounted/checked\. This could be useful if you need to emergency type the root password\. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the directory\.
+.TP
+\fBKEYTABLE\fR=\fIkeytable file\fR
+If you dump a keymap (using \fIdumpkeys\fR) to it will be loaded on bootup before filesystems are mounted/checked\. This could be useful if you need to emergency type the root password\. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the directory\.
 .IP
 example: \fBKEYTABLE="/usr/lib/kbd/keytables/us\.map"\fR
-.IP "\[ci]" 4
-\fBKEYBOARDTYPE\fR=\fIsun|pc\fR On \fBSPARC\fR only, sun means a sun keyboard is attached on </dev/kbd>, pc means a PS/2 keyboard is on PS/2 port\.
-.IP "" 0
+.TP
+\fBKEYBOARDTYPE\fR=\fIsun|pc\fR
+On \fBSPARC\fR only, sun means a sun keyboard is attached on </dev/kbd>, pc means a PS/2 keyboard is on PS/2 port\.
+.SS "/etc/sysconfig/mouse"
+.TP
+\fBMOUSETYPE\fR=\fItype\fR
+Supportet mouse types are: \fImicrosoft\fR, \fImouseman\fR, \fImousesystems\fR, <ps/2>, \fImsbm\fR, \fIlogibm\fR, \fIatibm\fR, \fIlogitech\fR, \fImmseries\fR and \fImmhittab\fR\.
+.TP
+\fBXEMU3\fR=\fIyes|no\fR
+Emulate three buttons with two buttons whenever necessary, most notably in X\.
+.TP
+\fBDEVICE\fR=\fIdevice node\fR
+The device of the mouse\. In addition, </dev/mouse> points to the mouse device\.
 .SH "Network\-scripts related documentation"
 .SH "SYNOPSIS"
 .SH "OPTIONS"

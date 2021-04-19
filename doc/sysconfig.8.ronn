@@ -95,10 +95,19 @@ _obsoleted values from earlier releases_:
     
     example: `KEYTABLE="/usr/lib/kbd/keytables/us.map"`
      
-* `KEYBOARDTYPE`=<sun|pc>
+* `KEYBOARDTYPE`=<sun|pc>:
     On `SPARC` only, sun means a sun keyboard is attached on </dev/kbd>, pc means a PS/2 keyboard is on PS/2 port.
 
+### /etc/sysconfig/mouse
 
+* `MOUSETYPE`=<type>:
+    Supported mouse types are: <microsoft>, <mouseman>, <mousesystems>, <ps/2>, <msbm>, <logibm>, <atibm>, <logitech>, <mmseries> and <mmhittab>.
+
+* `XEMU3`=<yes|no>:
+    Emulate three buttons with two buttons whenever necessary, most notably in X.
+
+* `DEVICE`=<device node>:
+    The device of the mouse. In addition, </dev/mouse> points to the mouse device.
 
 ## Network-scripts related documentation
 
