@@ -10,36 +10,36 @@ Doucumentation for /etc/sysconfig/* scripts
 .SS "/etc/sysconfig/authconfig"
 Used by authconfig to store information about the system\'s user information and authentication setup\. Changes made to this file have no effect until the next time authconfig is run\.
 .TP
-\fBUSEHESIOD=no\fR
+\fBUSEHESIOD\fR=\fIyes|no\fR
 Whether or not the hesiod naming service is in use\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
 .TP
-\fBUSELDAP=no\fR
+\fBUSELDAP\fR=\fIyes|no\fR
 Whether or not LDAP is used as a naming service\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
 .TP
-\fBUSENIS=no\fR
+\fBUSENIS\fR=\fIyes|no\fR
 Whether or not NIS is in use\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
 .TP
-\fBUSEKERBEROS=no\fR
+\fBUSEKERBEROS\fR=\fIyes|no\fR
 Whether or not Kerberos is in use\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\.
 .TP
-\fBUSELDAPAUTH=no\fR
+\fBUSELDAPAUTH\fR=\fIyes|no\fR
 Whether or not LDAP is being used for authentication\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\. Note that this option is separate from \fBUSELDAP\fR, and that neither implies the other\.
 .TP
-\fBUSEMD5=no\fR
+\fBUSEMD5\fR=\fIyes|no\fR
 Whether or not MD5\-based hashing should be used when setting passwords\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\. This option affects authentication using both local files and LDAP\.
 .TP
-\fBUSESHADOW=no\fR
+\fBUSESHADOW\fR=\fIyes|no\fR
 Whether or not shadow passwords are in use\. If not set, authconfig checks for the existence of \fB/etc/shadow\fR\.
 .TP
-\fBUSESMBAUTH=no\fR
+\fBUSESMBAUTH\fR=\fIyes|no\fR
 Whether or not SMB authentication is in use\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\.
 .SS "/etc/sysconfig/autofsck"
 Does not normally exist\. If it does, it can influence a choice whether or not to fsck after a crash\.
 .TP
-\fBAUTOFSCK_DEF_CHECK=no\fR
+\fBAUTOFSCK_DEF_CHECK\fR=\fIyes|no\fR
 If the user does not respond, choose whether or not to fsck\.
 .TP
-\fBAUTOFSCK_SINGLEUSER=[yes|no]\fR
+\fBAUTOFSCK_SINGLEUSER\fR=\fIyes|no\fR
 If the user does not respond, choose whether or not to fsck\.
 .SS "/etc/sysconfig/init"
 .TP
@@ -53,7 +53,7 @@ Sets the initial console logging level for the kernel\. The default is 7\. Numbe
 Column of the screen to start status labels at\. Defaults to 60\.
 .TP
 \fBMOVE_TO_COL\fR=\fIcommand\fR
-A command to move the cursor to $RES_COL\. Defaults to nasty\. ANSI sequences output by \fIecho \-e\fR\.
+A command to move the cursor to \fB$RES_COL\fR\. Defaults to nasty\. ANSI sequences output by \fIecho \-e\fR\.
 .TP
 \fBSETCOLOR_SUCCESS\fR=\fIcommand\fR
 A command to set the color to a color indicating success\. Defaults to nasty ANSI sequences output by \fIecho \-e\fR setting the color to green\.
@@ -67,16 +67,16 @@ A command to set the color to a color indicating warning\. Defaults to nasty ANS
 \fBSETCOLOR_NORMAL\fR=\fIcommand\fR
 A command to set the color to \'normal\'\. Defaults to nasty ANSI sequences output by \fIecho \- e\fR\.
 .TP
-\fBPROMPT=yes|no\fR
-Set to \'yes\' to enable the key check for interactive mode as well as asking if a filesystem check should be done\. Default is \'no\' and the kernel command line option "forcefsck" can be used to check the filesystems and "confirm" can be used to enable interactive startup questions\.
+\fBPROMPT\fR=\fIyes|no\fR
+Set to \fIyes\fR to enable the key check for interactive mode as well as asking if a filesystem check should be done\. Default is \fIno\fR and the kernel command line option \fIforcefsck\fR can be used to check the filesystems and \fIconfirm\fR can be used to enable interactive startup questions\.
 .P
 \fIobsoleted values from earlier releases\fR:
 .TP
-\fBMAGIC_SYSRQ=yes|no\fR
-Setting this to \'no\' used to disable the magic sysrq key and Stop\-A (break on serial console) on SPARC\. This setting has been moved into kernel\.sysrq and kernel\.stop\-a settings respectively in sysctl\.d/00\-system\.conf\. Setting either of them there to 0 disables it, setting it to 1 enables it\.
+\fBMAGIC_SYSRQ\fR=\fIyes|no\fR
+Setting this to \fIno\fR used to disable the magic sysrq key and \fBStop\-A\fR (break on serial console) on \fBSPARC\fR\. This setting has been moved into
 .TP
-\fBSTOP_A=yes|no\fR
-Setting this to \'no\' used to disable the Stop\-A (break on serial console) key on SPARC\. This setting has been moved into kernel\.stop\-a setting in sysctl\.d/00\-system\.conf\. Setting it there to 0 disables it, setting it to 1 enables it\. The setting should be present on SPARC only\.
+\fBSTOP_A\fR=\fIyes|no\fR
+Setting this to \fIno\fR used to disable the \fBStop\-A\fR (break on serial console) key on \fBSPARC\fR\. This setting has been moved into
 .SH "Network\-scripts related documentation"
 .SH "SYNOPSIS"
 .SH "OPTIONS"

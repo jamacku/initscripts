@@ -13,38 +13,38 @@ Doucumentation for /etc/sysconfig/* scripts
 
 Used by authconfig to store information about the system's user information and authentication setup. Changes made to this file have no effect until the next time authconfig is run.
 
-* `USEHESIOD=no`:
+* `USEHESIOD`=<yes|no>:
     Whether or not the hesiod naming service is in use. If not set, authconfig examines the passwd setting in `/etc/nsswitch.conf`.
 
-* `USELDAP=no`:
+* `USELDAP`=<yes|no>:
     Whether or not LDAP is used as a naming service. If not set, authconfig examines the passwd setting in `/etc/nsswitch.conf`.
 
-* `USENIS=no`:
+* `USENIS`=<yes|no>:
     Whether or not NIS is in use. If not set, authconfig examines the passwd setting in `/etc/nsswitch.conf`.
 
-* `USEKERBEROS=no`:
+* `USEKERBEROS`=<yes|no>:
     Whether or not Kerberos is in use. If not set, authconfig examines the settings in `/etc/pam.d/system-auth`.
 
-* `USELDAPAUTH=no`:
+* `USELDAPAUTH`=<yes|no>:
     Whether or not LDAP is being used for authentication. If not set, authconfig examines the settings in `/etc/pam.d/system-auth`. Note that this option is separate from `USELDAP`, and that neither implies the other.
 
-* `USEMD5=no`:
+* `USEMD5`=<yes|no>:
     Whether or not MD5-based hashing should be used when setting passwords. If not set, authconfig examines the settings in `/etc/pam.d/system-auth`. This option affects authentication using both local files and LDAP.
     
-* `USESHADOW=no`:
+* `USESHADOW`=<yes|no>:
     Whether or not shadow passwords are in use. If not set, authconfig checks for the existence of `/etc/shadow`.
     
-* `USESMBAUTH=no`:
+* `USESMBAUTH`=<yes|no>:
     Whether or not SMB authentication is in use. If not set, authconfig examines the settings in `/etc/pam.d/system-auth`.
 
 ### /etc/sysconfig/autofsck
 
 Does not normally exist. If it does, it can influence a choice whether or not to fsck after a crash.
 
-* `AUTOFSCK_DEF_CHECK=no`:
+* `AUTOFSCK_DEF_CHECK`=<yes|no>:
     If the user does not respond, choose whether or not to fsck.
 
-* `AUTOFSCK_SINGLEUSER=[yes|no]`:
+* `AUTOFSCK_SINGLEUSER`=<yes|no>:
     If the user does not respond, choose whether or not to fsck.
 
 ### /etc/sysconfig/init
@@ -59,7 +59,7 @@ Does not normally exist. If it does, it can influence a choice whether or not to
     Column of the screen to start status labels at. Defaults to 60.
 
 * `MOVE_TO_COL`=<command>:
-    A command to move the cursor to $RES_COL. Defaults to nasty. ANSI sequences output by <echo -e>.
+    A command to move the cursor to `$RES_COL`. Defaults to nasty. ANSI sequences output by <echo -e>.
 
 * `SETCOLOR_SUCCESS`=<command>:
     A command to set the color to a color indicating success. Defaults to nasty ANSI sequences output by <echo -e> setting the color to green.
@@ -73,16 +73,16 @@ Does not normally exist. If it does, it can influence a choice whether or not to
 * `SETCOLOR_NORMAL`=<command>:
     A command to set the color to 'normal'. Defaults to nasty ANSI sequences output by <echo - e>.
 
-* `PROMPT=yes|no`:
-    Set to 'yes' to enable the key check for interactive mode as well as asking if a filesystem check should be done. Default is 'no' and the kernel command line option "forcefsck" can be used to check the filesystems and "confirm" can be used to enable interactive startup questions.
+* `PROMPT`=<yes|no>:
+    Set to <yes> to enable the key check for interactive mode as well as asking if a filesystem check should be done. Default is <no> and the kernel command line option <forcefsck> can be used to check the filesystems and <confirm> can be used to enable interactive startup questions.
 
 _obsoleted values from earlier releases_:
 
-* `MAGIC_SYSRQ=yes|no`:
-    Setting this to 'no' used to disable the magic sysrq key and Stop-A (break on serial console) on SPARC. This setting has been moved into kernel.sysrq and kernel.stop-a settings respectively in sysctl.d/00-system.conf. Setting either of them there to 0 disables it, setting it to 1 enables it.
+* `MAGIC_SYSRQ`=<yes|no>:
+    Setting this to <no> used to disable the magic sysrq key and `Stop-A` (break on serial console) on `SPARC`. This setting has been moved into <kernel.sysrq> and <kernel.stop-a> settings respectively in <sysctl.d/00-system.conf>. Setting either of them there to 0 disables it, setting it to 1 enables it.
 
-* `STOP_A=yes|no`:
-    Setting this to 'no' used to disable the Stop-A (break on serial console) key on SPARC. This setting has been moved into kernel.stop-a setting in sysctl.d/00-system.conf. Setting it there to 0 disables it, setting it to 1 enables it. The setting should be present on SPARC only.
+* `STOP_A`=<yes|no>:
+    Setting this to <no> used to disable the `Stop-A` (break on serial console) key on `SPARC`. This setting has been moved into <kernel.stop-a> setting in <sysctl.d/00-system.conf>. Setting it there to 0 disables it, setting it to 1 enables it. The setting should be present on `SPARC` only.
 
 
 ## Network-scripts related documentation

@@ -97,21 +97,37 @@
 <p>Used by authconfig to store information about the system's user information and authentication setup. Changes made to this file have no effect until the next time authconfig is run.</p>
 
 <dl>
-<dt><code>USEHESIOD=no</code></dt>
+<dt>
+<code>USEHESIOD</code>=<var>yes|no</var>
+</dt>
 <dd>  Whether or not the hesiod naming service is in use. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
-<dt><code>USELDAP=no</code></dt>
+<dt>
+<code>USELDAP</code>=<var>yes|no</var>
+</dt>
 <dd>  Whether or not LDAP is used as a naming service. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
-<dt><code>USENIS=no</code></dt>
+<dt>
+<code>USENIS</code>=<var>yes|no</var>
+</dt>
 <dd>  Whether or not NIS is in use. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
-<dt><code>USEKERBEROS=no</code></dt>
+<dt>
+<code>USEKERBEROS</code>=<var>yes|no</var>
+</dt>
 <dd>  Whether or not Kerberos is in use. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>.</dd>
-<dt><code>USELDAPAUTH=no</code></dt>
+<dt>
+<code>USELDAPAUTH</code>=<var>yes|no</var>
+</dt>
 <dd>  Whether or not LDAP is being used for authentication. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>. Note that this option is separate from <code>USELDAP</code>, and that neither implies the other.</dd>
-<dt><code>USEMD5=no</code></dt>
+<dt>
+<code>USEMD5</code>=<var>yes|no</var>
+</dt>
 <dd>  Whether or not MD5-based hashing should be used when setting passwords. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>. This option affects authentication using both local files and LDAP.</dd>
-<dt><code>USESHADOW=no</code></dt>
+<dt>
+<code>USESHADOW</code>=<var>yes|no</var>
+</dt>
 <dd>  Whether or not shadow passwords are in use. If not set, authconfig checks for the existence of <code>/etc/shadow</code>.</dd>
-<dt><code>USESMBAUTH=no</code></dt>
+<dt>
+<code>USESMBAUTH</code>=<var>yes|no</var>
+</dt>
 <dd>  Whether or not SMB authentication is in use. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>.</dd>
 </dl>
 
@@ -120,9 +136,13 @@
 <p>Does not normally exist. If it does, it can influence a choice whether or not to fsck after a crash.</p>
 
 <dl>
-<dt><code>AUTOFSCK_DEF_CHECK=no</code></dt>
+<dt>
+<code>AUTOFSCK_DEF_CHECK</code>=<var>yes|no</var>
+</dt>
 <dd>  If the user does not respond, choose whether or not to fsck.</dd>
-<dt><code>AUTOFSCK_SINGLEUSER=[yes|no]</code></dt>
+<dt>
+<code>AUTOFSCK_SINGLEUSER</code>=<var>yes|no</var>
+</dt>
 <dd>  If the user does not respond, choose whether or not to fsck.</dd>
 </dl>
 
@@ -144,7 +164,7 @@
 <dt>
 <code>MOVE_TO_COL</code>=<var>command</var>
 </dt>
-<dd>  A command to move the cursor to $RES_COL. Defaults to nasty. ANSI sequences output by <var>echo -e</var>.</dd>
+<dd>  A command to move the cursor to <code>$RES_COL</code>. Defaults to nasty. ANSI sequences output by <var>echo -e</var>.</dd>
 <dt>
 <code>SETCOLOR_SUCCESS</code>=<var>command</var>
 </dt>
@@ -161,17 +181,25 @@
 <code>SETCOLOR_NORMAL</code>=<var>command</var>
 </dt>
 <dd>  A command to set the color to 'normal'. Defaults to nasty ANSI sequences output by <var>echo - e</var>.</dd>
-<dt><code>PROMPT=yes|no</code></dt>
-<dd>  Set to 'yes' to enable the key check for interactive mode as well as asking if a filesystem check should be done. Default is 'no' and the kernel command line option "forcefsck" can be used to check the filesystems and "confirm" can be used to enable interactive startup questions.</dd>
+<dt>
+<code>PROMPT</code>=<var>yes|no</var>
+</dt>
+<dd>  Set to <var>yes</var> to enable the key check for interactive mode as well as asking if a filesystem check should be done. Default is <var>no</var> and the kernel command line option <var>forcefsck</var> can be used to check the filesystems and <var>confirm</var> can be used to enable interactive startup questions.</dd>
 </dl>
 
 <p><em>obsoleted values from earlier releases</em>:</p>
 
 <dl>
-<dt><code>MAGIC_SYSRQ=yes|no</code></dt>
-<dd>  Setting this to 'no' used to disable the magic sysrq key and Stop-A (break on serial console) on SPARC. This setting has been moved into kernel.sysrq and kernel.stop-a settings respectively in sysctl.d/00-system.conf. Setting either of them there to 0 disables it, setting it to 1 enables it.</dd>
-<dt><code>STOP_A=yes|no</code></dt>
-<dd>  Setting this to 'no' used to disable the Stop-A (break on serial console) key on SPARC. This setting has been moved into kernel.stop-a setting in sysctl.d/00-system.conf. Setting it there to 0 disables it, setting it to 1 enables it. The setting should be present on SPARC only.</dd>
+<dt>
+<code>MAGIC_SYSRQ</code>=<var>yes|no</var>
+</dt>
+<dd>  Setting this to <var>no</var> used to disable the magic sysrq key and <code>Stop-A</code> (break on serial console) on <code>SPARC</code>. This setting has been moved into <kernel.sysrq> and <kernel.stop-a> settings respectively in &lt;sysctl.d/00-system.conf&gt;. Setting either of them there to 0 disables it, setting it to 1 enables it.</kernel.stop-a></kernel.sysrq>
+</dd>
+<dt>
+<code>STOP_A</code>=<var>yes|no</var>
+</dt>
+<dd>  Setting this to <var>no</var> used to disable the <code>Stop-A</code> (break on serial console) key on <code>SPARC</code>. This setting has been moved into <kernel.stop-a> setting in &lt;sysctl.d/00-system.conf&gt;. Setting it there to 0 disables it, setting it to 1 enables it. The setting should be present on `SPARC` only.</kernel.stop-a>
+</dd>
 </dl>
 
 <h2 id="Network-scripts-related-documentation">Network-scripts related documentation</h2>
