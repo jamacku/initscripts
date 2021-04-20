@@ -97,37 +97,21 @@
 <p>Used by authconfig to store information about the system's user information and authentication setup. Changes made to this file have no effect until the next time authconfig is run.</p>
 
 <dl>
-<dt>
-<code>USEHESIOD</code>=<var>yes|no</var>
-</dt>
+<dt><code>USEHESIOD=&lt;yes|no&gt;</code></dt>
 <dd>  Whether or not the hesiod naming service is in use. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
-<dt>
-<code>USELDAP</code>=<var>yes|no</var>
-</dt>
+<dt><code>USELDAP=&lt;yes|no&gt;</code></dt>
 <dd>  Whether or not LDAP is used as a naming service. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
-<dt>
-<code>USENIS</code>=<var>yes|no</var>
-</dt>
+<dt><code>USENIS=&lt;yes|no&gt;</code></dt>
 <dd>  Whether or not NIS is in use. If not set, authconfig examines the passwd setting in <code>/etc/nsswitch.conf</code>.</dd>
-<dt>
-<code>USEKERBEROS</code>=<var>yes|no</var>
-</dt>
+<dt><code>USEKERBEROS=&lt;yes|no&gt;</code></dt>
 <dd>  Whether or not Kerberos is in use. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>.</dd>
-<dt>
-<code>USELDAPAUTH</code>=<var>yes|no</var>
-</dt>
+<dt><code>USELDAPAUTH=&lt;yes|no&gt;</code></dt>
 <dd>  Whether or not LDAP is being used for authentication. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>. Note that this option is separate from <code>USELDAP</code>, and that neither implies the other.</dd>
-<dt>
-<code>USEMD5</code>=<var>yes|no</var>
-</dt>
+<dt><code>USEMD5=&lt;yes|no&gt;</code></dt>
 <dd>  Whether or not MD5-based hashing should be used when setting passwords. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>. This option affects authentication using both local files and LDAP.</dd>
-<dt>
-<code>USESHADOW</code>=<var>yes|no</var>
-</dt>
+<dt><code>USESHADOW=&lt;yes|no&gt;</code></dt>
 <dd>  Whether or not shadow passwords are in use. If not set, authconfig checks for the existence of <code>/etc/shadow</code>.</dd>
-<dt>
-<code>USESMBAUTH</code>=<var>yes|no</var>
-</dt>
+<dt><code>USESMBAUTH=&lt;yes|no&gt;</code></dt>
 <dd>  Whether or not SMB authentication is in use. If not set, authconfig examines the settings in <code>/etc/pam.d/system-auth</code>.</dd>
 </dl>
 
@@ -136,147 +120,99 @@
 <p>Does not normally exist. If it does, it can influence a choice whether or not to fsck after a crash.</p>
 
 <dl>
-<dt>
-<code>AUTOFSCK_DEF_CHECK</code>=<var>yes|no</var>
-</dt>
+<dt><code>AUTOFSCK_DEF_CHECK=&lt;yes|no&gt;</code></dt>
 <dd>  If the user does not respond, choose whether or not to fsck.</dd>
-<dt>
-<code>AUTOFSCK_SINGLEUSER</code>=<var>yes|no</var>
-</dt>
+<dt><code>AUTOFSCK_SINGLEUSER=&lt;yes|no&gt;</code></dt>
 <dd>  If the user does not respond, choose whether or not to fsck.</dd>
 </dl>
 
 <h3 id="-etc-sysconfig-init">/etc/sysconfig/init</h3>
 
 <dl>
-<dt>
-<code>BOOTUP</code>=<var>bootup mode</var>
-</dt>
+<dt><code>BOOTUP=&lt;bootup mode&gt;</code></dt>
 <dd>  <code>BOOTUP=graphical</code> means use X Windows graphical boot up.
   <code>BOOTUP=color</code> means colorized text mode boot display.
   <code>BOOTUP=verbose</code> means old style display.
 
     <p>Anything else means simplified display, but without color or ANSI-formatting.</p>
 </dd>
-<dt>
-<code>LOGLEVEL</code>=<var>number</var>
-</dt>
-<dd>  Sets the initial console logging level for the kernel. The default is 7. Number 8 means everything (including debugging). Number 1 means nothing except kernel panics. Syslogd will override this once it starts.</dd>
-<dt>
-<code>RES_COL</code>=<var>number</var>
-</dt>
-<dd>  Column of the screen to start status labels at. Defaults to 60.</dd>
-<dt>
-<code>MOVE_TO_COL</code>=<var>command</var>
-</dt>
-<dd>  A command to move the cursor to <code>$RES_COL</code>. Defaults to nasty. ANSI sequences output by <var>echo -e</var>.</dd>
-<dt>
-<code>SETCOLOR_SUCCESS</code>=<var>command</var>
-</dt>
-<dd>  A command to set the color to a color indicating success. Defaults to nasty ANSI sequences output by <var>echo -e</var> setting the color to green.</dd>
-<dt>
-<code>SETCOLOR_FAILURE</code>=<var>command</var>
-</dt>
-<dd>  A command to set the color to a color indicating failure. Defaults to nasty ANSI sequences output by <var>echo -e</var> setting the color to red.</dd>
-<dt>
-<code>SETCOLOR_WARNING</code>=<var>command</var>
-</dt>
-<dd>  A command to set the color to a color indicating warning. Defaults to nasty ANSI sequences output by <var>echo -e</var> setting the color to yellow.</dd>
-<dt>
-<code>SETCOLOR_NORMAL</code>=<var>command</var>
-</dt>
-<dd>  A command to set the color to 'normal'. Defaults to nasty ANSI sequences output by <var>echo - e</var>.</dd>
-<dt>
-<code>PROMPT</code>=<var>yes|no</var>
-</dt>
-<dd>  Set to <var>yes</var> to enable the key check for interactive mode as well as asking if a filesystem check should be done. Default is <var>no</var> and the kernel command line option <var>forcefsck</var> can be used to check the filesystems and <var>confirm</var> can be used to enable interactive startup questions.</dd>
+<dt><code>LOGLEVEL=&lt;number&gt;</code></dt>
+<dd>  Sets the initial console logging level for the kernel. The default is <code>7</code>. Number <code>8</code> means everything (including debugging). Number <code>1</code> means nothing except kernel panics. Syslogd will override this once it starts.</dd>
+<dt><code>RES_COL=&lt;number&gt;</code></dt>
+<dd>  Column of the screen to start status labels at. Defaults to <code>60</code>.</dd>
+<dt><code>MOVE_TO_COL=&lt;command&gt;</code></dt>
+<dd>  A command to move the cursor to <code>$RES_COL</code>. Defaults to nasty. ANSI sequences output by <code>echo -e</code>.</dd>
+<dt><code>SETCOLOR_SUCCESS=&lt;command&gt;</code></dt>
+<dd>  A command to set the color to a color indicating success. Defaults to nasty ANSI sequences output by <code>echo -e</code> setting the color to green.</dd>
+<dt><code>SETCOLOR_FAILURE=&lt;command&gt;</code></dt>
+<dd>  A command to set the color to a color indicating failure. Defaults to nasty ANSI sequences output by <code>echo -e</code> setting the color to red.</dd>
+<dt><code>SETCOLOR_WARNING=&lt;command&gt;</code></dt>
+<dd>  A command to set the color to a color indicating warning. Defaults to nasty ANSI sequences output by <code>echo -e</code> setting the color to yellow.</dd>
+<dt><code>SETCOLOR_NORMAL=&lt;command&gt;</code></dt>
+<dd>  A command to set the color to 'normal'. Defaults to nasty ANSI sequences output by <code>echo -e</code>.</dd>
+<dt><code>PROMPT=&lt;yes|no&gt;</code></dt>
+<dd>  Set to <code>yes</code> to enable the key check for interactive mode as well as asking if a filesystem check should be done. Default is <code>no</code> and the kernel command line option <code>forcefsck</code> can be used to check the filesystems and <code>confirm</code> can be used to enable interactive startup questions.</dd>
 </dl>
 
 <p><em>obsoleted values from earlier releases</em>:</p>
 
 <dl>
-<dt>
-<code>MAGIC_SYSRQ</code>=<var>yes|no</var>
-</dt>
-<dd>  Setting this to <var>no</var> used to disable the magic sysrq key and <code>Stop-A</code> (break on serial console) on <code>SPARC</code>. This setting has been moved into <kernel.sysrq> and <kernel.stop-a> settings respectively in &lt;sysctl.d/00-system.conf&gt;. Setting either of them there to 0 disables it, setting it to 1 enables it.</kernel.stop-a></kernel.sysrq>
-</dd>
-<dt>
-<code>STOP_A</code>=<var>yes|no</var>
-</dt>
-<dd>  Setting this to <var>no</var> used to disable the <code>Stop-A</code> (break on serial console) key on <code>SPARC</code>. This setting has been moved into <kernel.stop-a> setting in &lt;sysctl.d/00-system.conf&gt;. Setting it there to 0 disables it, setting it to 1 enables it. The setting should be present on `SPARC` only.</kernel.stop-a>
-</dd>
+<dt><code>MAGIC_SYSRQ=&lt;yes|no&gt;</code></dt>
+<dd>  Setting this to <code>no</code> used to disable the magic sysrq key and <code>Stop-A</code> (break on serial console) on <code>SPARC</code>. This setting has been moved into <code>kernel.sysrq</code> and <code>kernel.stop-a</code> settings respectively in <code>sysctl.d/00-system.conf</code>. Setting either of them there to <code>0</code> disables it, setting it to <code>1</code> enables it.</dd>
+<dt><code>STOP_A=&lt;yes|no&gt;</code></dt>
+<dd>  Setting this to <code>no</code> used to disable the <code>Stop-A</code> (break on serial console) key on <code>SPARC</code>. This setting has been moved into <code>kernel.stop-a</code> setting in <code>sysctl.d/00-system.conf</code>. Setting it there to <code>0</code> disables it, setting it to <code>1</code> enables it. The setting should be present on <code>SPARC</code> only.</dd>
 </dl>
 
 <h3 id="-etc-sysconfig-keyboard">/etc/sysconfig/keyboard</h3>
 
 <dl>
-<dt>
-<code>KEYTABLE</code>=<var>keytable file</var>
-</dt>
-<dd>  If you dump a keymap (using <var>dumpkeys</var>) to  it will be loaded on bootup before filesystems are mounted/checked. This could be useful if you need to emergency type the root password. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the  directory.
+<dt><code>KEYTABLE=&lt;keytable file&gt;</code></dt>
+<dd>  If you dump a keymap (using <code>dumpkeys</code>) to <code>/etc/sysconfig/console/default.kmap</code> it will be loaded on bootup before filesystems are mounted/checked. This could be useful if you need to emergency type the root password. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the <code>/usr/lib/kbd/keytables</code> directory.
 
     <p>Example: <code>KEYTABLE="/usr/lib/kbd/keytables/us.map"</code></p>
 </dd>
-<dt>
-<code>KEYBOARDTYPE</code>=<var>sun|pc</var>
-</dt>
-<dd>  On <code>SPARC</code> only, sun means a sun keyboard is attached on &lt;/dev/kbd&gt;, pc means a PS/2 keyboard is on PS/2 port.</dd>
+<dt><code>KEYBOARDTYPE=&lt;sun|pc&gt;</code></dt>
+<dd>  On <code>SPARC</code> only, sun means a sun keyboard is attached on <code>/dev/kbd</code>, pc means a PS/2 keyboard is on PS/2 port.</dd>
 </dl>
 
 <h3 id="-etc-sysconfig-mouse">/etc/sysconfig/mouse</h3>
 
 <dl>
-<dt>
-<code>MOUSETYPE</code>=<var>type</var>
-</dt>
-<dd>  Supported mouse types are: <var>microsoft</var>, <var>mouseman</var>, <var>mousesystems</var>, &lt;ps/2&gt;, <var>msbm</var>, <var>logibm</var>, <var>atibm</var>, <var>logitech</var>, <var>mmseries</var> and <var>mmhittab</var>.</dd>
-<dt>
-<code>XEMU3</code>=<var>yes|no</var>
-</dt>
+<dt><code>MOUSETYPE=&lt;type&gt;</code></dt>
+<dd>  Supported mouse types are: <code>microsoft</code>, <code>mouseman</code>, <code>mousesystems</code>, <code>ps/2</code>, <code>msbm</code>, <code>logibm</code>, <code>atibm</code>, <code>logitech</code>, <code>mmseries</code> and <code>mmhittab</code>.</dd>
+<dt><code>XEMU3=&lt;yes|no&gt;</code></dt>
 <dd>  Emulate three buttons with two buttons whenever necessary, most notably in X.</dd>
-<dt>
-<code>DEVICE</code>=<var>device node</var>
-</dt>
-<dd>  The device of the mouse. In addition, &lt;/dev/mouse&gt; points to the mouse device.</dd>
+<dt><code>DEVICE=&lt;device node&gt;</code></dt>
+<dd>  The device of the mouse. In addition, <code>/dev/mouse</code> points to the mouse device.</dd>
 </dl>
 
 <h3 id="-etc-sysconfig-network">/etc/sysconfig/network</h3>
 
 <dl>
 <dt>
-<code>NETWORKING</code>=<var>yes|no</var>:</dt>
+<code>NETWORKING=&lt;yes|no&gt;</code>:</dt>
 <dd></dd>
 <dt>
-<code>GATEWAY</code>=<var>gateway IP</var>:</dt>
+<code>GATEWAY=&lt;gateway IP&gt;</code>:</dt>
 <dd></dd>
+<dt><code>GATEWAYDEV=&lt;gateway&gt;</code></dt>
+<dd>  Device to use, when multiple devices have <code>GATEWAY=</code> e.g. <code>eth0</code>.</dd>
 <dt>
-<code>GATEWAYDEV</code>=<var>gateway</var>
-</dt>
-<dd>  Device to use, when multiple devices have <code>GATEWAY=</code> e.g. <var>eth0</var>.</dd>
-<dt>
-<code>NISDOMAIN</code>=<var>nis domain name</var>:</dt>
+<code>NISDOMAIN=&lt;nis domain name&gt;</code>:</dt>
 <dd></dd>
-<dt>
-<code>NOZEROCONF</code>=<var>value</var>
-</dt>
+<dt><code>NOZEROCONF=&lt;value&gt;</code></dt>
 <dd>  Set this to not set a route for dynamic link-local addresses.</dd>
-<dt>
-<code>NETWORKDELAY</code>=<var>delay in seconds</var>
-</dt>
-<dd>  Delay in seconds after all network interfaces are initialized. Useful if network has spanning tree running and must wait for STP convergence. Default: 0 (no delay)</dd>
-<dt>
-<code>WAIT_UNTIL_REACHABLE</code>=<var>IP address|DNS name</var>
-</dt>
-<dd>  Network initscript will wait until specified target is reachable. It starts to reaching passed IP address or DNS name every second until it reach it sucessfully or until it reach preset delay <code>NETWORKDELAY</code> (default 30). It works with both IPv4 and IPv6 adress and also with DNS name. Default: (not set)
+<dt><code>NETWORKDELAY=&lt;delay in seconds&gt;</code></dt>
+<dd>  Delay in seconds after all network interfaces are initialized. Useful if network has spanning tree running and must wait for STP convergence. Default: <code>0</code> (no delay)</dd>
+<dt><code>WAIT_UNTIL_REACHABLE=&lt;IP address|DNS name&gt;</code></dt>
+<dd>  Network initscript will wait until specified target is reachable. It starts to reaching passed IP address or DNS name every second until it reach it sucessfully or until it reach preset delay <code>NETWORKDELAY</code> (default <code>30</code>). It works with both IPv4 and IPv6 adress and also with DNS name. Default: (not set)
 
     <p>Example: <code>WAIT_UNTIL_REACHABLE=8.8.8.8</code></p>
 </dd>
-<dt>
-<strong>RES_OPTIONS</strong>=<code>&lt;list of resolv.conf options&gt;</code>
-</dt>
+<dt><code>RES_OPTIONS=&lt;list of resolv.conf options&gt;</code></dt>
 <dd>  Option takes a space-separated list of resolver options as explained in <span class="man-ref">resolv.conf<span class="s">(5)</span></span>.
 
-    <p>Example: <code>RES_OPTIONS="rotate timeout:1 retries:1"</code> this will be presented in &lt;/etc/resolv.conf&gt; like "&lt;options rotate timeout:1 retries:1&gt;"</p>
+    <p>Example: <code>RES_OPTIONS="rotate timeout:1 retries:1"</code> this will be presented in <code>/etc/resolv.conf</code> like <code>"options rotate timeout:1 retries:1"</code></p>
 </dd>
 </dl>
 

@@ -10,123 +10,123 @@ Doucumentation for /etc/sysconfig/* scripts
 .SS "/etc/sysconfig/authconfig"
 Used by authconfig to store information about the system\'s user information and authentication setup\. Changes made to this file have no effect until the next time authconfig is run\.
 .TP
-\fBUSEHESIOD\fR=\fIyes|no\fR
+\fBUSEHESIOD=<yes|no>\fR
 Whether or not the hesiod naming service is in use\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
 .TP
-\fBUSELDAP\fR=\fIyes|no\fR
+\fBUSELDAP=<yes|no>\fR
 Whether or not LDAP is used as a naming service\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
 .TP
-\fBUSENIS\fR=\fIyes|no\fR
+\fBUSENIS=<yes|no>\fR
 Whether or not NIS is in use\. If not set, authconfig examines the passwd setting in \fB/etc/nsswitch\.conf\fR\.
 .TP
-\fBUSEKERBEROS\fR=\fIyes|no\fR
+\fBUSEKERBEROS=<yes|no>\fR
 Whether or not Kerberos is in use\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\.
 .TP
-\fBUSELDAPAUTH\fR=\fIyes|no\fR
+\fBUSELDAPAUTH=<yes|no>\fR
 Whether or not LDAP is being used for authentication\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\. Note that this option is separate from \fBUSELDAP\fR, and that neither implies the other\.
 .TP
-\fBUSEMD5\fR=\fIyes|no\fR
+\fBUSEMD5=<yes|no>\fR
 Whether or not MD5\-based hashing should be used when setting passwords\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\. This option affects authentication using both local files and LDAP\.
 .TP
-\fBUSESHADOW\fR=\fIyes|no\fR
+\fBUSESHADOW=<yes|no>\fR
 Whether or not shadow passwords are in use\. If not set, authconfig checks for the existence of \fB/etc/shadow\fR\.
 .TP
-\fBUSESMBAUTH\fR=\fIyes|no\fR
+\fBUSESMBAUTH=<yes|no>\fR
 Whether or not SMB authentication is in use\. If not set, authconfig examines the settings in \fB/etc/pam\.d/system\-auth\fR\.
 .SS "/etc/sysconfig/autofsck"
 Does not normally exist\. If it does, it can influence a choice whether or not to fsck after a crash\.
 .TP
-\fBAUTOFSCK_DEF_CHECK\fR=\fIyes|no\fR
+\fBAUTOFSCK_DEF_CHECK=<yes|no>\fR
 If the user does not respond, choose whether or not to fsck\.
 .TP
-\fBAUTOFSCK_SINGLEUSER\fR=\fIyes|no\fR
+\fBAUTOFSCK_SINGLEUSER=<yes|no>\fR
 If the user does not respond, choose whether or not to fsck\.
 .SS "/etc/sysconfig/init"
 .TP
-\fBBOOTUP\fR=\fIbootup mode\fR
+\fBBOOTUP=<bootup mode>\fR
 \fBBOOTUP=graphical\fR means use X Windows graphical boot up\. \fBBOOTUP=color\fR means colorized text mode boot display\. \fBBOOTUP=verbose\fR means old style display\.
 .IP
 Anything else means simplified display, but without color or ANSI\-formatting\.
 .TP
-\fBLOGLEVEL\fR=\fInumber\fR
-Sets the initial console logging level for the kernel\. The default is 7\. Number 8 means everything (including debugging)\. Number 1 means nothing except kernel panics\. Syslogd will override this once it starts\.
+\fBLOGLEVEL=<number>\fR
+Sets the initial console logging level for the kernel\. The default is \fB7\fR\. Number \fB8\fR means everything (including debugging)\. Number \fB1\fR means nothing except kernel panics\. Syslogd will override this once it starts\.
 .TP
-\fBRES_COL\fR=\fInumber\fR
-Column of the screen to start status labels at\. Defaults to 60\.
+\fBRES_COL=<number>\fR
+Column of the screen to start status labels at\. Defaults to \fB60\fR\.
 .TP
-\fBMOVE_TO_COL\fR=\fIcommand\fR
-A command to move the cursor to \fB$RES_COL\fR\. Defaults to nasty\. ANSI sequences output by \fIecho \-e\fR\.
+\fBMOVE_TO_COL=<command>\fR
+A command to move the cursor to \fB$RES_COL\fR\. Defaults to nasty\. ANSI sequences output by \fBecho \-e\fR\.
 .TP
-\fBSETCOLOR_SUCCESS\fR=\fIcommand\fR
-A command to set the color to a color indicating success\. Defaults to nasty ANSI sequences output by \fIecho \-e\fR setting the color to green\.
+\fBSETCOLOR_SUCCESS=<command>\fR
+A command to set the color to a color indicating success\. Defaults to nasty ANSI sequences output by \fBecho \-e\fR setting the color to green\.
 .TP
-\fBSETCOLOR_FAILURE\fR=\fIcommand\fR
-A command to set the color to a color indicating failure\. Defaults to nasty ANSI sequences output by \fIecho \-e\fR setting the color to red\.
+\fBSETCOLOR_FAILURE=<command>\fR
+A command to set the color to a color indicating failure\. Defaults to nasty ANSI sequences output by \fBecho \-e\fR setting the color to red\.
 .TP
-\fBSETCOLOR_WARNING\fR=\fIcommand\fR
-A command to set the color to a color indicating warning\. Defaults to nasty ANSI sequences output by \fIecho \-e\fR setting the color to yellow\.
+\fBSETCOLOR_WARNING=<command>\fR
+A command to set the color to a color indicating warning\. Defaults to nasty ANSI sequences output by \fBecho \-e\fR setting the color to yellow\.
 .TP
-\fBSETCOLOR_NORMAL\fR=\fIcommand\fR
-A command to set the color to \'normal\'\. Defaults to nasty ANSI sequences output by \fIecho \- e\fR\.
+\fBSETCOLOR_NORMAL=<command>\fR
+A command to set the color to \'normal\'\. Defaults to nasty ANSI sequences output by \fBecho \-e\fR\.
 .TP
-\fBPROMPT\fR=\fIyes|no\fR
-Set to \fIyes\fR to enable the key check for interactive mode as well as asking if a filesystem check should be done\. Default is \fIno\fR and the kernel command line option \fIforcefsck\fR can be used to check the filesystems and \fIconfirm\fR can be used to enable interactive startup questions\.
+\fBPROMPT=<yes|no>\fR
+Set to \fByes\fR to enable the key check for interactive mode as well as asking if a filesystem check should be done\. Default is \fBno\fR and the kernel command line option \fBforcefsck\fR can be used to check the filesystems and \fBconfirm\fR can be used to enable interactive startup questions\.
 .P
 \fIobsoleted values from earlier releases\fR:
 .TP
-\fBMAGIC_SYSRQ\fR=\fIyes|no\fR
-Setting this to \fIno\fR used to disable the magic sysrq key and \fBStop\-A\fR (break on serial console) on \fBSPARC\fR\. This setting has been moved into
+\fBMAGIC_SYSRQ=<yes|no>\fR
+Setting this to \fBno\fR used to disable the magic sysrq key and \fBStop\-A\fR (break on serial console) on \fBSPARC\fR\. This setting has been moved into \fBkernel\.sysrq\fR and \fBkernel\.stop\-a\fR settings respectively in \fBsysctl\.d/00\-system\.conf\fR\. Setting either of them there to \fB0\fR disables it, setting it to \fB1\fR enables it\.
 .TP
-\fBSTOP_A\fR=\fIyes|no\fR
-Setting this to \fIno\fR used to disable the \fBStop\-A\fR (break on serial console) key on \fBSPARC\fR\. This setting has been moved into
+\fBSTOP_A=<yes|no>\fR
+Setting this to \fBno\fR used to disable the \fBStop\-A\fR (break on serial console) key on \fBSPARC\fR\. This setting has been moved into \fBkernel\.stop\-a\fR setting in \fBsysctl\.d/00\-system\.conf\fR\. Setting it there to \fB0\fR disables it, setting it to \fB1\fR enables it\. The setting should be present on \fBSPARC\fR only\.
 .SS "/etc/sysconfig/keyboard"
 .TP
-\fBKEYTABLE\fR=\fIkeytable file\fR
-If you dump a keymap (using \fIdumpkeys\fR) to it will be loaded on bootup before filesystems are mounted/checked\. This could be useful if you need to emergency type the root password\. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the directory\.
+\fBKEYTABLE=<keytable file>\fR
+If you dump a keymap (using \fBdumpkeys\fR) to \fB/etc/sysconfig/console/default\.kmap\fR it will be loaded on bootup before filesystems are mounted/checked\. This could be useful if you need to emergency type the root password\. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the \fB/usr/lib/kbd/keytables\fR directory\.
 .IP
 Example: \fBKEYTABLE="/usr/lib/kbd/keytables/us\.map"\fR
 .TP
-\fBKEYBOARDTYPE\fR=\fIsun|pc\fR
-On \fBSPARC\fR only, sun means a sun keyboard is attached on </dev/kbd>, pc means a PS/2 keyboard is on PS/2 port\.
+\fBKEYBOARDTYPE=<sun|pc>\fR
+On \fBSPARC\fR only, sun means a sun keyboard is attached on \fB/dev/kbd\fR, pc means a PS/2 keyboard is on PS/2 port\.
 .SS "/etc/sysconfig/mouse"
 .TP
-\fBMOUSETYPE\fR=\fItype\fR
-Supported mouse types are: \fImicrosoft\fR, \fImouseman\fR, \fImousesystems\fR, <ps/2>, \fImsbm\fR, \fIlogibm\fR, \fIatibm\fR, \fIlogitech\fR, \fImmseries\fR and \fImmhittab\fR\.
+\fBMOUSETYPE=<type>\fR
+Supported mouse types are: \fBmicrosoft\fR, \fBmouseman\fR, \fBmousesystems\fR, \fBps/2\fR, \fBmsbm\fR, \fBlogibm\fR, \fBatibm\fR, \fBlogitech\fR, \fBmmseries\fR and \fBmmhittab\fR\.
 .TP
-\fBXEMU3\fR=\fIyes|no\fR
+\fBXEMU3=<yes|no>\fR
 Emulate three buttons with two buttons whenever necessary, most notably in X\.
 .TP
-\fBDEVICE\fR=\fIdevice node\fR
-The device of the mouse\. In addition, </dev/mouse> points to the mouse device\.
+\fBDEVICE=<device node>\fR
+The device of the mouse\. In addition, \fB/dev/mouse\fR points to the mouse device\.
 .SS "/etc/sysconfig/network"
 .TP
-\fBNETWORKING\fR=\fIyes|no\fR:
+\fBNETWORKING=<yes|no>\fR:
 
 .TP
-\fBGATEWAY\fR=\fIgateway IP\fR:
+\fBGATEWAY=<gateway IP>\fR:
 
 .TP
-\fBGATEWAYDEV\fR=\fIgateway\fR
-Device to use, when multiple devices have \fBGATEWAY=\fR e\.g\. \fIeth0\fR\.
+\fBGATEWAYDEV=<gateway>\fR
+Device to use, when multiple devices have \fBGATEWAY=\fR e\.g\. \fBeth0\fR\.
 .TP
-\fBNISDOMAIN\fR=\fInis domain name\fR:
+\fBNISDOMAIN=<nis domain name>\fR:
 
 .TP
-\fBNOZEROCONF\fR=\fIvalue\fR
+\fBNOZEROCONF=<value>\fR
 Set this to not set a route for dynamic link\-local addresses\.
 .TP
-\fBNETWORKDELAY\fR=\fIdelay in seconds\fR
-Delay in seconds after all network interfaces are initialized\. Useful if network has spanning tree running and must wait for STP convergence\. Default: 0 (no delay)
+\fBNETWORKDELAY=<delay in seconds>\fR
+Delay in seconds after all network interfaces are initialized\. Useful if network has spanning tree running and must wait for STP convergence\. Default: \fB0\fR (no delay)
 .TP
-\fBWAIT_UNTIL_REACHABLE\fR=\fIIP address|DNS name\fR
-Network initscript will wait until specified target is reachable\. It starts to reaching passed IP address or DNS name every second until it reach it sucessfully or until it reach preset delay \fBNETWORKDELAY\fR (default 30)\. It works with both IPv4 and IPv6 adress and also with DNS name\. Default: (not set)
+\fBWAIT_UNTIL_REACHABLE=<IP address|DNS name>\fR
+Network initscript will wait until specified target is reachable\. It starts to reaching passed IP address or DNS name every second until it reach it sucessfully or until it reach preset delay \fBNETWORKDELAY\fR (default \fB30\fR)\. It works with both IPv4 and IPv6 adress and also with DNS name\. Default: (not set)
 .IP
 Example: \fBWAIT_UNTIL_REACHABLE=8\.8\.8\.8\fR
 .TP
-\fBRES_OPTIONS\fR=\fB<list of resolv\.conf options>\fR
+\fBRES_OPTIONS=<list of resolv\.conf options>\fR
 Option takes a space\-separated list of resolver options as explained in resolv\.conf(5)\.
 .IP
-Example: \fBRES_OPTIONS="rotate timeout:1 retries:1"\fR this will be presented in </etc/resolv\.conf> like "<options rotate timeout:1 retries:1>"
+Example: \fBRES_OPTIONS="rotate timeout:1 retries:1"\fR this will be presented in \fB/etc/resolv\.conf\fR like \fB"options rotate timeout:1 retries:1"\fR
 .SH "Network\-scripts related documentation"
 .SH "SYNOPSIS"
 .SH "OPTIONS"
