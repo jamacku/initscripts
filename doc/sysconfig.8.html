@@ -215,7 +215,7 @@
 </dt>
 <dd>  If you dump a keymap (using <var>dumpkeys</var>) to  it will be loaded on bootup before filesystems are mounted/checked. This could be useful if you need to emergency type the root password. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the  directory.
 
-    <p>example: <code>KEYTABLE="/usr/lib/kbd/keytables/us.map"</code></p>
+    <p>Example: <code>KEYTABLE="/usr/lib/kbd/keytables/us.map"</code></p>
 </dd>
 <dt>
 <code>KEYBOARDTYPE</code>=<var>sun|pc</var>
@@ -229,7 +229,7 @@
 <dt>
 <code>MOUSETYPE</code>=<var>type</var>
 </dt>
-<dd>  Supportet mouse types are: <var>microsoft</var>, <var>mouseman</var>, <var>mousesystems</var>, &lt;ps/2&gt;, <var>msbm</var>, <var>logibm</var>, <var>atibm</var>, <var>logitech</var>, <var>mmseries</var> and <var>mmhittab</var>.</dd>
+<dd>  Supported mouse types are: <var>microsoft</var>, <var>mouseman</var>, <var>mousesystems</var>, &lt;ps/2&gt;, <var>msbm</var>, <var>logibm</var>, <var>atibm</var>, <var>logitech</var>, <var>mmseries</var> and <var>mmhittab</var>.</dd>
 <dt>
 <code>XEMU3</code>=<var>yes|no</var>
 </dt>
@@ -238,6 +238,46 @@
 <code>DEVICE</code>=<var>device node</var>
 </dt>
 <dd>  The device of the mouse. In addition, &lt;/dev/mouse&gt; points to the mouse device.</dd>
+</dl>
+
+<h3 id="-etc-sysconfig-network">/etc/sysconfig/network</h3>
+
+<dl>
+<dt>
+<code>NETWORKING</code>=<var>yes|no</var>:</dt>
+<dd></dd>
+<dt>
+<code>GATEWAY</code>=<var>gateway IP</var>:</dt>
+<dd></dd>
+<dt>
+<code>GATEWAYDEV</code>=<var>gateway</var>
+</dt>
+<dd>  Device to use, when multiple devices have <code>GATEWAY=</code> e.g. <var>eth0</var>.</dd>
+<dt>
+<code>NISDOMAIN</code>=<var>nis domain name</var>:</dt>
+<dd></dd>
+<dt>
+<code>NOZEROCONF</code>=<var>value</var>
+</dt>
+<dd>  Set this to not set a route for dynamic link-local addresses.</dd>
+<dt>
+<code>NETWORKDELAY</code>=<var>delay in seconds</var>
+</dt>
+<dd>  Delay in seconds after all network interfaces are initialized. Useful if network has spanning tree running and must wait for STP convergence. Default: 0 (no delay)</dd>
+<dt>
+<code>WAIT_UNTIL_REACHABLE</code>=<var>IP address|DNS name</var>
+</dt>
+<dd>  Network initscript will wait until specified target is reachable. It starts to reaching passed IP address or DNS name every second until it reach it sucessfully or until it reach preset delay <code>NETWORKDELAY</code> (default 30). It works with both IPv4 and IPv6 adress and also with DNS name. Default: (not set)
+
+    <p>Example: <code>WAIT_UNTIL_REACHABLE=8.8.8.8</code></p>
+</dd>
+<dt>
+<strong>RES_OPTIONS</strong>=<code>&lt;list of resolv.conf options&gt;</code>
+</dt>
+<dd>  Option takes a space-separated list of resolver options as explained in <span class="man-ref">resolv.conf<span class="s">(5)</span></span>.
+
+    <p>Example: <code>RES_OPTIONS="rotate timeout:1 retries:1"</code> this will be presented in &lt;/etc/resolv.conf&gt; like "&lt;options rotate timeout:1 retries:1&gt;"</p>
+</dd>
 </dl>
 
 <h2 id="Network-scripts-related-documentation">Network-scripts related documentation</h2>

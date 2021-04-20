@@ -93,7 +93,7 @@ _obsoleted values from earlier releases_:
 * `KEYTABLE`=<keytable file>:
     If you dump a keymap (using <dumpkeys>) to </etc/sysconfig/console/default.kmap> it will be loaded on bootup before filesystems are mounted/checked. This could be useful if you need to emergency type the root password. This has to be a dumped keymap, as opposed to copying the shipped keymap files, as the shipped files include other maps from the </usr/lib/kbd/keytables> directory.
     
-    example: `KEYTABLE="/usr/lib/kbd/keytables/us.map"`
+    Example: `KEYTABLE="/usr/lib/kbd/keytables/us.map"`
      
 * `KEYBOARDTYPE`=<sun|pc>:
     On `SPARC` only, sun means a sun keyboard is attached on </dev/kbd>, pc means a PS/2 keyboard is on PS/2 port.
@@ -108,6 +108,38 @@ _obsoleted values from earlier releases_:
 
 * `DEVICE`=<device node>:
     The device of the mouse. In addition, </dev/mouse> points to the mouse device.
+
+### /etc/sysconfig/network
+
+* `NETWORKING`=<yes|no>:
+
+* `GATEWAY`=<gateway IP>:
+
+* `GATEWAYDEV`=<gateway>:
+    Device to use, when multiple devices have `GATEWAY=` e.g. <eth0>.
+
+* `NISDOMAIN`=<nis domain name>:
+
+* `NOZEROCONF`=<value>:
+    Set this to not set a route for dynamic link-local addresses.
+
+* `NETWORKDELAY`=<delay in seconds>:
+    Delay in seconds after all network interfaces are initialized. Useful if network has spanning tree running and must wait for STP convergence. Default: 0 (no delay)
+
+* `WAIT_UNTIL_REACHABLE`=<IP address|DNS name>:
+    Network initscript will wait until specified target is reachable. It starts to reaching passed IP address or DNS name every second until it reach it sucessfully or until it reach preset delay `NETWORKDELAY` (default 30). It works with both IPv4 and IPv6 adress and also with DNS name. Default: (not set)
+    
+    Example: `WAIT_UNTIL_REACHABLE=8.8.8.8`
+
+* **RES_OPTIONS**=`<list of resolv.conf options>`:
+    Option takes a space-separated list of resolver options as explained in resolv.conf(5).
+
+    Example: `RES_OPTIONS="rotate timeout:1 retries:1"` this will be presented in </etc/resolv.conf> like "<options rotate timeout:1 retries:1>"
+
+
+
+
+
 
 ## Network-scripts related documentation
 
