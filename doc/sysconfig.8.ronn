@@ -136,6 +136,28 @@ _obsoleted values from earlier releases_:
 
     Example: `RES_OPTIONS="rotate timeout:1 retries:1"` this will be presented in `/etc/resolv.conf` like `"options rotate timeout:1 retries:1"`
 
+* `IFDOWN_ON_SHUTDOWN=<yes|no>`:
+    If `yes`, do bring interfaces down during system shutdown. If `no`, leave them in their current state (this is only supported on hosts using systemd). Default: `yes` (bring interfaces down).
+
+* `IPV6FORWARDING=<yes|no>`:
+    Enable or disable global forwarding of incoming IPv6 packets on all interfaces. Note: Actual packet forwarding cannot be controlled per-device, use netfilter6 for such issues. Default: `no`.
+
+* `IPV6_AUTOCONF=<yes|no>`:
+    Sets the default for device-based autoconfiguration. Default: `yes` if `IPV6FORWARDING=no`, `no` if `IPV6FORWARDING=yes`.
+
+* `IPV6_ROUTER=<yes|no>`
+    Sets the default for device-based Host/Router behaviour. Default: `yes` if `IPV6FORWARDING=yes`, `no` if `IPV6FORWARDING=no`.
+
+* `IPV6_AUTOTUNNEL=yes|no`
+    Controls automatic IPv6 tunneling. Default: `no`.
+
+* `IPV6_DEFAULTGW=<IPv6 address[%interface]> (optional)`:
+    Add a default route through specified gateway. An interface can be specified: required for link-local addresses.
+
+    Note: If `IPV6_DEFAULTGW` is specified with `%interface` scope and it doesn't match `IPV6_DEFAULTDEV`, `IPV6_DEFAULTDEV` is ignored. Also it's preferred to use `%interface` for all addresses, not just `link-local` if you have multiple IPv6-enabled interfaces.
+
+    Examples: `IPV6_DEFAULTGW="3ffe:ffff:1234:5678::1"` -- Add default route through `3ffe:ffff:1234:5678::1`; `IPV6_DEFAULTGW="3ffe:ffff:1234:5678::1%eth0"` -- Add default route through `3ffe:ffff:1234:5678::1` and device `eth0`; `IPV6_DEFAULTGW="fe80::1%eth0"` -- Add default route through `fe80::1` and device `eth0`.
+
 
 
 
