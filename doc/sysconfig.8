@@ -1,6 +1,6 @@
 .\" generated with Ronn-NG/v0.9.1
 .\" http://github.com/apjanke/ronn-ng/tree/0.9.1
-.TH "SYSCONFIG" "8" "April 2021" ""
+.TH "SYSCONFIG" "8" "May 2021" ""
 .SH "NAME"
 \fBsysconfig\fR \- Sysconfig related documentation
 .SH "DESCRIPTION"
@@ -127,6 +127,58 @@ Example: \fBWAIT_UNTIL_REACHABLE=8\.8\.8\.8\fR
 Option takes a space\-separated list of resolver options as explained in resolv\.conf(5)\.
 .IP
 Example: \fBRES_OPTIONS="rotate timeout:1 retries:1"\fR this will be presented in \fB/etc/resolv\.conf\fR like \fB"options rotate timeout:1 retries:1"\fR
+.TP
+\fBIFDOWN_ON_SHUTDOWN=<yes|no>\fR
+If \fByes\fR, do bring interfaces down during system shutdown\. If \fBno\fR, leave them in their current state (this is only supported on hosts using systemd)\. Default: \fByes\fR (bring interfaces down)\.
+.TP
+\fBIPV6FORWARDING=<yes|no>\fR
+Enable or disable global forwarding of incoming IPv6 packets on all interfaces\. Note: Actual packet forwarding cannot be controlled per\-device, use netfilter6 for such issues\. Default: \fBno\fR\.
+.TP
+\fBIPV6_AUTOCONF=<yes|no>\fR
+Sets the default for device\-based autoconfiguration\. Default: \fByes\fR if \fBIPV6FORWARDING=no\fR, \fBno\fR if \fBIPV6FORWARDING=yes\fR\.
+.TP
+\fBIPV6_ROUTER=<yes|no>\fR
+Sets the default for device\-based Host/Router behaviour\. Default: \fByes\fR if \fBIPV6FORWARDING=yes\fR, \fBno\fR if \fBIPV6FORWARDING=no\fR\.
+.TP
+\fBIPV6_AUTOTUNNEL=<yes|no>\fR
+Controls automatic IPv6 tunneling\. Default: \fBno\fR\.
+.TP
+\fBIPV6_DEFAULTGW=<IPv6 address[%interface]> (optional)\fR
+Add a default route through specified gateway\. An interface can be specified: required for link\-local addresses\.
+.IP
+Note: If \fBIPV6_DEFAULTGW\fR is specified with \fB%interface\fR scope and it doesn\'t match \fBIPV6_DEFAULTDEV\fR, \fBIPV6_DEFAULTDEV\fR is ignored\. Also it\'s preferred to use \fB%interface\fR for all addresses, not just \fBlink\-local\fR if you have multiple IPv6\-enabled interfaces\.
+.IP
+Examples: \fBIPV6_DEFAULTGW="3ffe:ffff:1234:5678::1"\fR \-\- Add default route through \fB3ffe:ffff:1234:5678::1\fR; \fBIPV6_DEFAULTGW="3ffe:ffff:1234:5678::1%eth0"\fR \-\- Add default route through \fB3ffe:ffff:1234:5678::1\fR and device \fBeth0\fR; \fBIPV6_DEFAULTGW="fe80::1%eth0"\fR \-\- Add default route through \fBfe80::1\fR and device \fBeth0\fR\.
+.TP
+\fBIPV6_DEFAULTDEV=<interface> (optional)\fR
+Add a default route through specified interface without specifying next hop\. Type of interface will be tested whether this is allowed
+.IP
+Note: \fBtun6to4\fR does not support an additional \fBIPV6_DEFAULTGW\fR\. Other interfaces prefer \fBIPV6_DEFAULTGW\fR, if specified\.
+.IP
+Examples: \fBIPV6_DEFAULTDEV="eth0"\fR INVALID example! ; \fBIPV6_DEFAULTDEV="ppp0"\fR ; \fBIPV6_DEFAULTDEV="sit1"\fR Examples for \fB6to4\fR \- \fBIPV6_DEFAULTDEV="tun6to4"\fR ; Add default route through dedicated \fB6to4\fR tunnel device \fBtun6to4\fR, if configured
+.TP
+\fBIPV6_RADVD_PIDFILE=<pid\-file> (optional/obsolete)\fR
+Location of PID file for controlling radvd, see \fBIPV6_CONTROL_RADVD\fR\. Default value is \fB/run/radvd/radvd\.pid\fR\.
+.IP
+Note: This option is marked as obsolete, but it is still to some extend supported\.
+.IP
+Example: \fBIPV6_RADVD_PIDFILE="/some/other/location/radvd\.pid"\fR
+.TP
+\fBIPV6_RADVD_TRIGGER_ACTION=<startstop|reload|restart|SIGHUP> (optional)\fR
+How to trigger radvd in case of 6to4 or PPP action ; \fBstartstop\fR \- radvd starts if interface goes up and stops\. If interface goes down using initscript call of radvd with related parameter\. \fBreload|restart\fR \- initscript of radvd is called with this parameter\. \fBSIGHUP\fR \- signal HUP is sent to radvd, pidfile must be specified, if not the default is set\.Default value is \fBSIGHUP\fR\.
+.IP
+Note: IPv6 options above can be overridden in interface\-specific configuration\.
+.SS "/etc/sysconfig/network \- obsoleted values from earlier releases"
+.TP
+\fBFORWARD_IPV4=<yes|no>\fR
+Create a new file in \fB/etc/sysctl\.d/\fR with the \fBnet\.ipv4\.ip_forward\fR setting instead\. Setting it to \fB1\fR there enables IP forwarding, setting it to \fB0\fR disables it (which is the default for RFC compliance)\.
+.TP
+\fBNETWORKWAIT=<yes|no>\fR
+This is not used with the move to systemd\.
+.TP
+\fBHOSTNAME=<hostname>\fR
+Default value is \fBfqdn\fR by default\. This is now configured in \fB/etc/hostname\fR\.
+.SS "/etc/sysconfig/static\-routes\-ipv6"
 .SH "Network\-scripts related documentation"
 .SH "SYNOPSIS"
 .SH "OPTIONS"

@@ -214,7 +214,56 @@
 
     <p>Example: <code>RES_OPTIONS="rotate timeout:1 retries:1"</code> this will be presented in <code>/etc/resolv.conf</code> like <code>"options rotate timeout:1 retries:1"</code></p>
 </dd>
+<dt><code>IFDOWN_ON_SHUTDOWN=&lt;yes|no&gt;</code></dt>
+<dd>  If <code>yes</code>, do bring interfaces down during system shutdown. If <code>no</code>, leave them in their current state (this is only supported on hosts using systemd). Default: <code>yes</code> (bring interfaces down).</dd>
+<dt><code>IPV6FORWARDING=&lt;yes|no&gt;</code></dt>
+<dd>  Enable or disable global forwarding of incoming IPv6 packets on all interfaces. Note: Actual packet forwarding cannot be controlled per-device, use netfilter6 for such issues. Default: <code>no</code>.</dd>
+<dt><code>IPV6_AUTOCONF=&lt;yes|no&gt;</code></dt>
+<dd>  Sets the default for device-based autoconfiguration. Default: <code>yes</code> if <code>IPV6FORWARDING=no</code>, <code>no</code> if <code>IPV6FORWARDING=yes</code>.</dd>
+<dt><code>IPV6_ROUTER=&lt;yes|no&gt;</code></dt>
+<dd>  Sets the default for device-based Host/Router behaviour. Default: <code>yes</code> if <code>IPV6FORWARDING=yes</code>, <code>no</code> if <code>IPV6FORWARDING=no</code>.</dd>
+<dt><code>IPV6_AUTOTUNNEL=&lt;yes|no&gt;</code></dt>
+<dd>  Controls automatic IPv6 tunneling. Default: <code>no</code>.</dd>
+<dt><code>IPV6_DEFAULTGW=&lt;IPv6 address[%interface]&gt; (optional)</code></dt>
+<dd>  Add a default route through specified gateway. An interface can be specified: required for link-local addresses.
+
+    <p>Note: If <code>IPV6_DEFAULTGW</code> is specified with <code>%interface</code> scope and it doesn't match <code>IPV6_DEFAULTDEV</code>, <code>IPV6_DEFAULTDEV</code> is ignored. Also it's preferred to use <code>%interface</code> for all addresses, not just <code>link-local</code> if you have multiple IPv6-enabled interfaces.</p>
+
+    <p>Examples: <code>IPV6_DEFAULTGW="3ffe:ffff:1234:5678::1"</code> -- Add default route through <code>3ffe:ffff:1234:5678::1</code>; <code>IPV6_DEFAULTGW="3ffe:ffff:1234:5678::1%eth0"</code> -- Add default route through <code>3ffe:ffff:1234:5678::1</code> and device <code>eth0</code>; <code>IPV6_DEFAULTGW="fe80::1%eth0"</code> -- Add default route through <code>fe80::1</code> and device <code>eth0</code>.</p>
+</dd>
+<dt><code>IPV6_DEFAULTDEV=&lt;interface&gt; (optional)</code></dt>
+<dd>  Add a default route through specified interface without specifying next hop. Type of interface will be tested whether this is allowed
+
+    <p>Note: <code>tun6to4</code> does not support an additional <code>IPV6_DEFAULTGW</code>. Other interfaces prefer <code>IPV6_DEFAULTGW</code>, if specified.</p>
+
+    <p>Examples: <code>IPV6_DEFAULTDEV="eth0"</code> INVALID example! ; <code>IPV6_DEFAULTDEV="ppp0"</code> ; <code>IPV6_DEFAULTDEV="sit1"</code> Examples for <code>6to4</code> - <code>IPV6_DEFAULTDEV="tun6to4"</code> ; Add default route through dedicated <code>6to4</code> tunnel device <code>tun6to4</code>, if configured</p>
+</dd>
+<dt><code>IPV6_RADVD_PIDFILE=&lt;pid-file&gt; (optional/obsolete)</code></dt>
+<dd>  Location of PID file for controlling radvd, see <code>IPV6_CONTROL_RADVD</code>. Default value is <code>/run/radvd/radvd.pid</code>.
+
+    <p>Note: This option is marked as obsolete, but it is still to some extend supported.</p>
+
+    <p>Example: <code>IPV6_RADVD_PIDFILE="/some/other/location/radvd.pid"</code></p>
+</dd>
+<dt><code>IPV6_RADVD_TRIGGER_ACTION=&lt;startstop|reload|restart|SIGHUP&gt; (optional)</code></dt>
+<dd>  How to trigger radvd in case of 6to4 or PPP action ; <code>startstop</code> - radvd starts if interface goes up and stops. If interface goes down using initscript call of radvd with related parameter. <code>reload|restart</code> - initscript of radvd is called with this parameter. <code>SIGHUP</code> - signal HUP is sent to radvd, pidfile must be specified, if not the default is set.Default value is <code>SIGHUP</code>.
+
+    <p>Note: IPv6 options above can be overridden in interface-specific configuration.</p>
+</dd>
 </dl>
+
+<h3 id="-etc-sysconfig-network-obsoleted-values-from-earlier-releases">/etc/sysconfig/network - obsoleted values from earlier releases</h3>
+
+<dl>
+<dt><code>FORWARD_IPV4=&lt;yes|no&gt;</code></dt>
+<dd>  Create a new file in <code>/etc/sysctl.d/</code> with the <code>net.ipv4.ip_forward</code> setting instead. Setting it to <code>1</code> there enables IP forwarding, setting it to <code>0</code> disables it (which is the default for RFC compliance).</dd>
+<dt><code>NETWORKWAIT=&lt;yes|no&gt;</code></dt>
+<dd>  This is not used with the move to systemd.</dd>
+<dt><code>HOSTNAME=&lt;hostname&gt;</code></dt>
+<dd>  Default value is <code>fqdn</code> by default. This is now configured in <code>/etc/hostname</code>.</dd>
+</dl>
+
+<h3 id="-etc-sysconfig-static-routes-ipv6">/etc/sysconfig/static-routes-ipv6</h3>
 
 <h2 id="Network-scripts-related-documentation">Network-scripts related documentation</h2>
 
@@ -244,7 +293,7 @@
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'></li>
-    <li class='tc'>April 2021</li>
+    <li class='tc'>May 2021</li>
     <li class='tr'>sysconfig(8)</li>
   </ol>
 
