@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - rhel*-branch
+      - new-feature-actions-PR-comments
 
 jobs:
   shellCheck:
@@ -26,3 +27,14 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}  
       - name: Run shell-check test
         run: bash ./.github/workflows/check-shell.sh ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}
+      - name: Output test reuslts
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
