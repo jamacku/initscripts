@@ -13,28 +13,61 @@ jobs:
     defaults:
       run:
         shell: bash
+
+    outputs:
+      numberOfAddedIssues: ${{ steps.shell-check-test.outputs.numberOfAddedIssues }}
+      numberOfSolvedIssues: ${{ steps.shell-check-test.outputs.numberOfSolvedIssues }}
+      listOfScripts: ${{ steps.set-output.outputs.listOfScripts }}
+
     steps:
       - name: Install dependencies
         run: sudo apt update && sudo apt-get install -y cmake help2man libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-python-dev libboost-regex-dev tree
+      
       - name: Clone csdiff repository
         run: cd ../ && git clone --depth=1 https://github.com/csutils/csdiff.git && cd -
+      
       - name: Build and install csdiff
         run: cd ../csdiff && sudo make && sudo make install && cd -
+      
       - name: Repository checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}  
+      
       - name: Run shell-check test
-        run: bash ./.github/workflows/check-shell.sh ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}
+        id: shellCheck-result
+        run: |
+          bash ./.github/workflows/check-shell.sh ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}
+
+      - name: Set output
+        id: set-output
+        # Run even if previous step fails
+        if: always()
+        run: |
+          echo "::set-output name=listOfScripts::${{ env.LIST_OF_SCRIPTS }}"
+          echo "::set-output name=numberOfAddedIssues::${{ env.NUMBER_OF_ADDED_ISSUES }}"
+          echo "::set-output name=numberOfSolvedIssues::${{ env.NUMBER_OF_SOLVED_ISSUES }}"
+          echo "${{ env.LIST_OF_SCRIPTS }}"
+  
+  shellCheckOutput:
+    needs: shellCheck
+    # Run even if shellCheck job fails
+    if: always()
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash
+
+    steps:
       - name: Output test reuslts
-        uses: actions/github-script@v4
+        uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            github.issues.createComment({
+            github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
+              body: '👋 **Thanks** for reporting! ${{ 7 }} ${{ needs.shellCheck.outputs.numberOfSolvedIssues }} ${{ needs.shellCheck.outputs.listOfScripts }} ${{ needs.shellCheck.outputs.numberOfAddedIssues }}'
             })

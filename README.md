@@ -95,3 +95,5 @@ distribution:
 
 **NOTE:** Bug reports created for *Fedora* in [bugzilla](https://bugzilla.redhat.com/) usually take a lot of time to
 resolve. *We advise to use GitHub instead.*
+
+TEST

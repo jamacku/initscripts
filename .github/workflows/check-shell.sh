@@ -29,6 +29,9 @@ for file in "${list_of_changes[@]}"; do
   check_shebang "$file" && list_of_changed_scripts+=("./${file}")
 done
 
+# Expose variable list_of_changed_scripts[*] for use inside GA workflow
+echo "LIST_OF_SCRIPTS=${list_of_changed_scripts[*]}" >> "$GITHUB_ENV"
+
 # Get list of exceptions
 list_of_exceptions=()
 file_to_array "$SCRIPT_DIR/exception-list.txt" "list_of_exceptions" 1
@@ -68,10 +71,15 @@ echo -e "::: ${WHITE}Validation Output${NOCOLOR} :::"
 echo ":::::::::::::::::::::::::"
 echo -e "\n"
 
+
 # Check output for Fixes
 csdiff --fixed "../dest-br-shellcheck.err" "../pr-br-shellcheck.err" > ../fixes.log
+
+# Expose variable NUMBER_OF_SOLVED_ISSUES for use inside GA workflow
+echo "NUMBER_OF_SOLVED_ISSUES=$(grep -Eo "[0-9]*" < <(csgrep --mode=stat ../fixes.log))" >> "$GITHUB_ENV"
+
 if [ "$(cat ../fixes.log | wc -l)" -ne 0 ]; then
-  echo -e "${GREEN}Fixed bugs:${NOCOLOR}" 
+  echo -e "${GREEN}Fixed bugs:${NOCOLOR}"
   csgrep ../fixes.log
   echo "---------------------"
 else
@@ -80,10 +88,15 @@ else
 fi
 echo -e "\n"
 
+
 # Check output for added bugs
 csdiff --fixed "../pr-br-shellcheck.err" "../dest-br-shellcheck.err" > ../bugs.log
+
+# Expose variable NUMBER_OF_ADDED_ISSUES for use inside GA workflow
+echo "NUMBER_OF_ADDED_ISSUES=$(grep -Eo "[0-9]*" < <(csgrep --mode=stat ../bugs.log))" >> "$GITHUB_ENV"
+
 if [ "$(cat ../bugs.log | wc -l)" -ne 0 ]; then
-  echo -e "${RED}Added bugs, NEED INSPECTION:${NOCOLOR}" 
+  echo -e "${RED}Added bugs, NEED INSPECTION:${NOCOLOR}"
   csgrep ../bugs.log
   echo "---------------------"
   exitstatus=1
