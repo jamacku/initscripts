@@ -76,7 +76,8 @@ echo -e "\n"
 csdiff --fixed "../dest-br-shellcheck.err" "../pr-br-shellcheck.err" > ../fixes.log
 
 # Expose variable NUMBER_OF_SOLVED_ISSUES for use inside GA workflow
-echo "NUMBER_OF_SOLVED_ISSUES=$(grep -Eo "[0-9]*" < <(csgrep --mode=stat ../fixes.log))" >> "$GITHUB_ENV"
+no_fixes=$(grep -Eo "[0-9]*" < <(csgrep --mode=stat ../fixes.log))
+echo "NUMBER_OF_SOLVED_ISSUES=${no_fixes:-0}" >> "$GITHUB_ENV"
 
 if [ "$(cat ../fixes.log | wc -l)" -ne 0 ]; then
   echo -e "${GREEN}Fixed bugs:${NOCOLOR}"
@@ -93,7 +94,8 @@ echo -e "\n"
 csdiff --fixed "../pr-br-shellcheck.err" "../dest-br-shellcheck.err" > ../bugs.log
 
 # Expose variable NUMBER_OF_ADDED_ISSUES for use inside GA workflow
-echo "NUMBER_OF_ADDED_ISSUES=$(grep -Eo "[0-9]*" < <(csgrep --mode=stat ../bugs.log))" >> "$GITHUB_ENV"
+no_issues=$(grep -Eo "[0-9]*" < <(csgrep --mode=stat ../bugs.log))
+echo "NUMBER_OF_ADDED_ISSUES=${no_issues:-0}" >> "$GITHUB_ENV"
 
 if [ "$(cat ../bugs.log | wc -l)" -ne 0 ]; then
   echo -e "${RED}Added bugs, NEED INSPECTION:${NOCOLOR}"
