@@ -14,11 +14,6 @@ jobs:
       run:
         shell: bash
 
-    outputs:
-      numberOfAddedIssues: ${{ steps.shell-check-test.outputs.numberOfAddedIssues }}
-      numberOfSolvedIssues: ${{ steps.shell-check-test.outputs.numberOfSolvedIssues }}
-      listOfScripts: ${{ steps.set-output.outputs.listOfScripts }}
-
     steps:
       - name: Install dependencies
         run: sudo apt update && sudo apt-get install -y cmake help2man libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-python-dev libboost-regex-dev tree
@@ -36,31 +31,11 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}  
       
       - name: Run shell-check test
-        id: shellCheck-result
         run: |
           bash ./.github/workflows/check-shell.sh ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}
 
-      - name: Set output
-        id: set-output
-        # Run even if previous step fails
-        if: always()
-        run: |
-          echo "::set-output name=listOfScripts::${{ env.LIST_OF_SCRIPTS }}"
-          echo "::set-output name=numberOfAddedIssues::${{ env.NUMBER_OF_ADDED_ISSUES }}"
-          echo "::set-output name=numberOfSolvedIssues::${{ env.NUMBER_OF_SOLVED_ISSUES }}"
-          echo "${{ env.LIST_OF_SCRIPTS }}"
-  
-  shellCheckOutput:
-    needs: shellCheck
-    # Run even if shellCheck job fails
-    if: always()
-    runs-on: ubuntu-20.04
-    defaults:
-      run:
-        shell: bash
-
-    steps:
       - name: Output test reuslts
+        if: always()
         uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -69,5 +44,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 **Thanks** for reporting! ${{ 7 }} ${{ needs.shellCheck.outputs.numberOfSolvedIssues }} ${{ needs.shellCheck.outputs.listOfScripts }} ${{ needs.shellCheck.outputs.numberOfAddedIssues }}'
+              body: '👋 **Thanks** for reporting! ${{ env.NUMBER_OF_ADDED_ISSUES }} ${{ env.NUMBER_OF_SOLVED_ISSUES }} ${{ env.LIST_OF_SCRIPTS }}'
             })
