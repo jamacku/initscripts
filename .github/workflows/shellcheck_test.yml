@@ -44,5 +44,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 **Thanks** for reporting! ${{ env.NUMBER_OF_ADDED_ISSUES }} ${{ env.NUMBER_OF_SOLVED_ISSUES }} ${{ env.LIST_OF_SCRIPTS }}'
+              body: '```diff\n# ShellCheck test summary\n- added issues: ${{ env.NUMBER_OF_ADDED_ISSUES }}\n+ solved issues: ${{ env.NUMBER_OF_SOLVED_ISSUES }}\n\n# list of edited shell scripts:\n${{ env.LIST_OF_SCRIPTS }}\n```'
             })
