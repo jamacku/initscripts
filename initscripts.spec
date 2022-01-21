@@ -8,6 +8,8 @@
 # For more info: https://fedoraproject.org/wiki/Packaging:Guidelines#PIE
 %global _hardened_build 1
 
+%global crate ifcfg-devname
+
 %global shared_requirements \
 Requires:         bash                       \
 Requires:         filesystem          >= 3   \
@@ -24,7 +26,8 @@ Release:          1%{?dist}
 License:          GPLv2
 
 URL:              https://github.com/fedora-sysv/initscripts
-Source:           https://github.com/fedora-sysv/initscripts/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1:          https://github.com/fedora-sysv/initscripts/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source2:          %{crates_source}
 
 %shared_requirements
 
@@ -36,6 +39,7 @@ Requires:         systemd
 Requires:         util-linux
 Requires:         chkconfig
 Requires:         initscripts-service
+Requires:         ifcfg-devname
 
 Requires(pre):    shadow-utils
 Requires(post):   coreutils
@@ -202,15 +206,33 @@ support. Additional configuration is required after installation.
 Please note that readonly-root package is considered deprecated with limited support.
 Please use systemd-volatile-root functionality instead, if possible.
 
+# ---------------
+
+%package -n ifcfg-devname
+Summary:          Udev helper utility that provides network interface naming using kernel cmdline and ifcfg configuration
+ExclusiveArch:    %{rust_arches}
+
+BuildRequires:  rust-packaging
+
+%description -n ifcfg-devname
+Udev helper utility that provides network interface naming using kernel cmdline and ifcfg configuration
+
 # === BUILD INSTRUCTIONS ======================================================
 
 %prep
 %autosetup -S git
+%cargo_prep
+
+# ---------------
+
+%generate_buildrequires
+%cargo_generate_buildrequires
 
 # ---------------
 
 %build
 %make_build PYTHON=%{__python3}
+%cargo_build
 
 # ---------------
 
@@ -321,9 +343,6 @@ fi
 
 %{_prefix}/lib/systemd/system/import-state.service
 %{_prefix}/lib/systemd/system/loadmodules.service
-%{_prefix}/lib/udev/rename_device
-
-%{_udevrulesdir}/*
 
 %{_mandir}/man1/*
 
@@ -379,6 +398,14 @@ fi
 
 %{_libexecdir}/readonly-root
 %{_prefix}/lib/systemd/system/readonly-root.service
+
+# ---------------
+
+%files -n ifcfg-devname
+%{_prefix}/lib/udev/ifcfg-devname
+
+%{_udevrulesdir}/*
+
 
 # =============================================================================
 
