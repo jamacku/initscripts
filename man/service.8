@@ -38,6 +38,10 @@ The
 .I SCRIPT
 parameter specifies a System V init script,
 located in \fB/etc/init.d/\fISCRIPT\fR.
+Names containing path separators (\fB/\fR), empty names, \fB.\fR and \fB..\fR
+are rejected.
+.I COMMAND
+values containing path separators, \fB.\fR and \fB..\fR are also rejected.
 The supported values of
 .I COMMAND
 depend on the invoked script,

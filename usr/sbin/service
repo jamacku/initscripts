@@ -11,6 +11,24 @@ is_ignored_file() {
     return 1
 }
 
+is_valid_service_name() {
+    case "$1" in
+        */*|""|..|.)
+            return 1
+            ;;
+    esac
+    return 0
+}
+
+invalid_service_name() {
+    if [ -z "$1" ]; then
+        echo $"No service name specified" >&2
+    else
+        echo $"${1}: invalid service name" >&2
+    fi
+    exit 2
+}
+
 VERSION="$(basename $0) ver. 1.1"
 USAGE="Usage: $(basename $0) < option > | --status-all | \
 [ service_name [ command | --full-restart ] ]"
@@ -66,6 +84,7 @@ while [ $# -gt 0 ]; do
             [ -L "${SERVICEDIR}" ] || { echo $"Support for initscripts isn't installed" >&2 ; exit 4 ; }
 
             SERVICE="${1}"
+            is_valid_service_name "${SERVICE}" || invalid_service_name "${SERVICE}"
             if [ -x "${SERVICEDIR}/${SERVICE}" ]; then
                 env -i PATH="$PATH" TERM="$TERM" "${SERVICEDIR}/${SERVICE}" stop
                 env -i PATH="$PATH" TERM="$TERM" "${SERVICEDIR}/${SERVICE}" start
@@ -82,6 +101,11 @@ while [ $# -gt 0 ]; do
         ;;
     esac
 done
+
+is_valid_service_name "${SERVICE}" || invalid_service_name "${SERVICE}"
+if [ -n "${ACTION}" ]; then
+    is_valid_service_name "${ACTION}" || { echo $"${ACTION}: invalid action name" >&2 ; exit 2 ; }
+fi
 
 if [ -f "${SERVICEDIR}/${SERVICE}" ]; then
     # LSB daemons that dies abnormally in systemd looks alive in systemd's eyes due to RemainAfterExit=yes
